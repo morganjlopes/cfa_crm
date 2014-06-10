@@ -29,6 +29,9 @@ gem 'spring',        group: :development
 # Friendly Urls
 gem 'friendly_id', '~> 5.0.0'
 
+# Simple Forms
+gem 'simple_form'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
