@@ -1,0 +1,84 @@
+$red: #900;
+$blue: #52BAD5;
+$blue_hover: rgba(82, 186, 213, 0.75);
+
+.navbar-brand img {
+	max-width: 100px;
+}
+
+.navbar-default {
+	margin-bottom: 0px;
+	border: 0px;
+	.navbar-nav > li > a {
+		font-size: 20px;
+		padding: 25px 30px;
+	}
+}
+
+.navbar-default .navbar-nav > .active > a {
+	background-color: transparent;
+	border-bottom: 4px solid $blue;
+	color: $blue;
+	padding-bottom: 21px;
+	&:hover, &:active {
+		background-color: transparent;
+		border-color: $blue_hover;
+		color: $blue_hover;
+	}
+}
+
+.heading {
+	background-color: $blue;
+	color: #FFF;
+	h1 {
+		margin: 30px 0px;
+		small {
+			color: rgba(255, 255, 255, 0.50);
+		}
+	}
+}
+
+.full_width {
+	width: 100%;
+}
+
+.main_container {
+	margin-top:	30px;
+}
+
+.general_form_wrapper {
+	max-width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.form-actions {
+	border-top: 2px solid #E2E2E2;
+	margin-top: 20px;
+	padding-top: 20px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="week"],
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="time"],
+input[type="url"],
+input[type="file"],
+textarea {
+  font-size: 15px;
+  padding: 6px 10px;
+  margin-bottom: 10px;
+  border: 2px solid #E2E2E2;
+  border-radius: 2px;
+  line-height: 25px;
+  color: #555;
+  width: 100%;
+}

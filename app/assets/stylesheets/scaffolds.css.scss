@@ -1,15 +1,19 @@
 body {
+  font-family: 'Source-Sans-Pro', verdana, arial, helvetica, sans-serif;
   background-color: #fff;
   color: #333;
-  font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
 }
 
 p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
+  font-family: 'Source-Sans-Pro', verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Source-Sans-Pro', verdana, arial, helvetica, sans-serif;
 }
 
 pre {
@@ -18,21 +22,24 @@ pre {
   font-size: 11px;
 }
 
-a {
-  color: #000;
-  &:visited {
-    color: #666;
-  }
-  &:hover {
-    color: #fff;
-    background-color: #000;
-  }
-}
-
 div {
   &.field, &.actions {
     margin-bottom: 10px;
   }
+}
+
+legend {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  font-size: 21px;
+  line-height: inherit;
+  color: #333;
+  border: 0;
+  border-bottom: 1px solid #E5E5E5;
+  padding-bottom: 15px;
 }
 
 #notice {

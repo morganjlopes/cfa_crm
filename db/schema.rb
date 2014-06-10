@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140610115037) do
+ActiveRecord::Schema.define(version: 20140610115426) do
+
+  create_table "digital_addresses", force: true do |t|
+    t.integer  "address_type",     default: 1
+    t.string   "url"
+    t.string   "addressable_type"
+    t.integer  "addressable_id"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false

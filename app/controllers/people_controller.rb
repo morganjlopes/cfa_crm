@@ -51,24 +51,19 @@ class PeopleController < ApplicationController
     end
   end
 
-  # DELETE /people/1
-  # DELETE /people/1.json
-  def destroy
-    @person.destroy
-    respond_to do |format|
-      format.html { redirect_to people_url, notice: 'Person was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_person
-      @person = Person.find(params[:id])
+      @person = Person.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
-      params.require(:person).permit(:name, :bio, :gender, :photo, :slug)
+      params.require(:person).permit(:name,
+                                     :bio,
+                                     :gender,
+                                     :photo,
+                                     :slug,
+                                     digital_addresses_attributes: [:id, :name, :address_type, :url],)
     end
 end

@@ -1,4 +1,9 @@
-<h1>Editing person</h1>
+<%= content_for :heading do %>
+  <h1 class="text-center">
+    <small>Update Information for</small><br>
+    <%= @person.name %>
+  </h1>
+<% end %>
 
 <%= render 'form' %>
 

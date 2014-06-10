@@ -1,13 +1,15 @@
-<h1>Listing people</h1>
+<%= content_for :heading do %>
+  <h1>
+    <small>Building Positive Connections</small><br>
+    People
+  </h1>
+<% end %>
 
 <table class="table">
   <thead>
     <tr>
       <th>Name</th>
-      <th>Bio</th>
-      <th>Gender</th>
-      <th>Photo</th>
-      <th>Slug</th>
+      <th>Connect</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,13 +18,29 @@
     <% @people.each do |person| %>
       <tr>
         <td><%= person.name %></td>
-        <td><%= person.bio %></td>
-        <td><%= person.gender %></td>
-        <td><%= person.photo %></td>
-        <td><%= person.slug %></td>
-        <td><%= link_to 'Show', person %></td>
-        <td><%= link_to 'Edit', edit_person_path(person) %></td>
-        <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <% person.digital_addresses.order("address_type asc").each do |digi| %>
+            <% if digi.address_type > 2 %>
+              <%= link_to digi.url, :target => "_blank" do %>
+                <div class="<%= digi.icon %>"></div>
+              <% end %>
+            <% elsif digi.address_type > 1 %>
+              <%= link_to "mailto:#{digi.url}", :target => "_blank" do %>
+                <div class="<%= digi.icon %>"></div>
+              <% end %>
+            <% else %>
+              <%= link_to "tel:+#{digi.url}", :target => "_blank" do %>
+                <div class="<%= digi.icon %>"></div>
+              <% end %>
+            <% end %>
+          <% end %> 
+        </td>
+        <td>
+          <div class="btn-group pull-right">
+            <%= link_to 'Show', person, :class => "btn btn-default btn-sm" %>
+            <%= link_to 'Edit', edit_person_path(person), :class => "btn btn-default btn-sm" %>
+          </div>
+        </td>
       </tr>
     <% end %>
   </tbody>

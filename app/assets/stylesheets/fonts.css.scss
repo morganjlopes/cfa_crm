@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'WebHostingHub-Glyphs';
+    src: asset-data-url('webhostinghub-glyphs.eot');
+    src: asset-data-url('webhostinghub-glyphs.eot') format('embedded-opentype'),
+         asset-data-url('webhostinghub-glyphs.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    -moz-font-feature-settings: "calt=0,liga=0";
+}
+
+@font-face {
+  font-family: 'Source-Sans-Pro';
+
+  src: asset-data-url('sourcesanspro-regular.eot');
+  src: asset-data-url('sourcesanspro-regular.eot') format('embedded-opentype'),
+       asset-data-url('sourcesanspro-regular.woff') format('woff'),
+       asset-data-url('sourcesanspro-regular.ttf') format('truetype'),
+       asset-data-url('sourcesanspro-regular.svg') format('svg');
+}
