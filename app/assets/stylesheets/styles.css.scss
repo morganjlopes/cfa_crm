@@ -14,6 +14,17 @@ $blue_hover: rgba(82, 186, 213, 0.75);
 		font-size: 15px;
 		padding: 25px 30px;
 	}
+	.navbar-text {
+		color: #777;
+		padding: 11px;
+	}
+}
+
+.dropdown-menu > li > a {
+	padding: 15px 20px;
+	[class^="icon-"], [class*=" icon-"] {
+		margin-right: 10px;
+	}
 }
 
 .navbar-default .navbar-nav > .active > a {
@@ -57,11 +68,15 @@ $blue_hover: rgba(82, 186, 213, 0.75);
 	max-width: 500px;
 	margin-left: auto;
 	margin-right: auto;
+	&.user_form {
+		max-width: 300px;
+	}
 }
 
 .form-actions {
 	border-top: 2px solid #E2E2E2;
 	margin-top: 20px;
+	margin-bottom: 20px;
 	padding-top: 20px;
 }
 

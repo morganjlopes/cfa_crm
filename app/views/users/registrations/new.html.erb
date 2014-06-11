@@ -1,0 +1,24 @@
+<%= content_for :heading do %>
+  <h1 class="text-center">
+    <small>Join the Team</small><br>
+    Sign Up
+  </h1>
+<% end %>
+
+<div class="general_form_wrapper user_form">
+	<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+	  <%= f.error_notification %>
+
+	  <div class="form-inputs">
+	    <%= f.input :email, required: true, autofocus: true %>
+	    <%= f.input :password, required: true %>
+	    <%= f.input :password_confirmation, required: true %>
+	  </div>
+
+	  <div class="form-actions">
+	    <%= f.button :submit, "Sign up", :class => "btn btn-primary btn-block btn-lg" %>
+	  </div>
+	<% end %>
+
+	<%= render "users/shared/links" %>
+</div>
