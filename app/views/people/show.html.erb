@@ -43,7 +43,11 @@
 
   <div class="col-sm-6 col-md-5">
     <h2>Notes</h2>
-    <%= render @notes if @notes %>
+    <%= render @notes.last(5) if @notes %>
+    <div class="text-center">
+      <hr>
+      <%= link_to "View All Notes", person_notes_url(@person), :class => "btn btn-link" %>
+    </div>
   </div>
   
   <div class="col-sm-12 col-md-4">

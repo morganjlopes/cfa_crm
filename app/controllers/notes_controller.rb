@@ -1,11 +1,14 @@
 class NotesController < ApplicationController
   before_action :set_note, only: [:show, :edit, :update, :destroy]
-  before_filter :load_noteable, :only => [:create, :destroy]
+  before_filter :load_noteable, :only => [:create, :destroy, :index]
 
   # GET /notes
   # GET /notes.json
   def index
-    @notes = Note.all
+    @notes = @noteable.notes.all
+
+    resource, id = request.path.split('/')[1, 2]
+    @tab_name = "#{resource.singularize.pluralize}"
   end
 
   # GET /notes/1

@@ -1,37 +1,10 @@
-<h1>Listing notes</h1>
+<%= content_for :heading do %>
+  <h1 class="text-center">
+    <small><%= @noteable.name %></small><br>
+    Notes
+  </h1>
+<% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Body</th>
-      <th>Reminder ds</th>
-      <th>Reminder sent dts</th>
-      <th>User</th>
-      <th>Attachment</th>
-      <th>Noteable</th>
-      <th>Noteable type</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @notes.each do |note| %>
-      <tr>
-        <td><%= note.body %></td>
-        <td><%= note.reminder_ds %></td>
-        <td><%= note.reminder_sent_dts %></td>
-        <td><%= note.user_id %></td>
-        <td><%= note.attachment %></td>
-        <td><%= note.noteable_id %></td>
-        <td><%= note.noteable_type %></td>
-        <td><%= link_to 'Show', note %></td>
-        <td><%= link_to 'Edit', edit_note_path(note) %></td>
-        <td><%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Note', new_note_path %>
+<div class="col-sm-6 col-md-6 col-md-offset-3">
+  <%= render @notes if @notes %>
+</div>

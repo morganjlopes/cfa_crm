@@ -6,7 +6,7 @@
 <% end %>
 
 <div class="row">
-  <div class="col-md-3">
+  <div class="col-sm-6 col-md-3">
     <!-- Main Photo -->
     <% if @company.photo.present? %>
       <%= image_tag @company.photo, :class => "asset_img" %>
@@ -43,7 +43,11 @@
 
   <div class="col-sm-6 col-md-5">
     <h2>Notes</h2>
-    <%= render @notes if @notes %>
+    <%= render @notes.last(5) if @notes %>
+    <div class="text-center">
+      <hr>
+      <%= link_to "View All Notes", company_notes_url(@company), :class => "btn btn-link" %>
+    </div>
   </div>
   
   <div class="col-sm-12 col-md-4">
