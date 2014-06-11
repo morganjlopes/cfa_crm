@@ -3,8 +3,8 @@ class Person < ActiveRecord::Base
   friendly_id :name, use: [:slugged, :history]
   
 	has_many :digital_addresses, as: :addressable, :dependent => :destroy
-	has_many :companies, through: :employments
 	has_many :employments
+	has_many :companies, through: :employments
 	has_many :notes, as: :noteable, :dependent => :destroy
 
 	accepts_nested_attributes_for :digital_addresses

@@ -3,6 +3,7 @@ class Company < ActiveRecord::Base
   friendly_id :name, use: [:slugged, :history]
   
 	has_many :digital_addresses, as: :addressable, :dependent => :destroy
+	has_many :employments
 	has_many :people, through: :employments
 	has_many :notes, as: :noteable, :dependent => :destroy
 

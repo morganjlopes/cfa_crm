@@ -27,15 +27,17 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Companies</th>
       <th>Connect</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @people.each do |person| %>
+    <% @people.order("name asc").each do |person| %>
       <tr>
         <td><%= person.name %></td>
+        <td><%= raw person.companies.map {|c| link_to c.name, company_path(c)}.join(", ") %></td>
         <td>
           <% person.digital_addresses.order("address_type asc").each do |digi| %>
             <% if digi.address_type > 2 %>

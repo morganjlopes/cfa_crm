@@ -31,6 +31,10 @@ class PeopleController < ApplicationController
 
   # GET /people/1/edit
   def edit
+    unless @person.employments.present?
+      @person.employments.build
+    end
+
     @tab_name = "people"
   end
 
@@ -77,6 +81,7 @@ class PeopleController < ApplicationController
                                      :gender,
                                      :photo,
                                      :slug,
-                                     digital_addresses_attributes: [:id, :name, :address_type, :url],)
+                                     digital_addresses_attributes: [:id, :name, :address_type, :url],
+                                     employments_attributes: [:id, :company_id, :role])
     end
 end

@@ -27,16 +27,16 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Photo</th>
+      <th>Employees</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @companies.each do |company| %>
+    <% @companies.order("name asc").each do |company| %>
       <tr>
         <td><%= company.name %></td>
-        <td><%= company.photo %></td>
+        <td><%= raw company.people.map {|e| link_to e.name, person_path(e)}.join(", ") %></td>
         <td>
           <div class="btn-group pull-right">
             <%= link_to 'Show', company, :class => "btn btn-default btn-sm" %>

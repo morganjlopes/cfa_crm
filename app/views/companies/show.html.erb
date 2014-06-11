@@ -39,6 +39,17 @@
         <%= @company.bio %>
       </p>
     <% end %>
+
+    <% if @company.people %>
+      <h3>Employees</h3>
+      <% @company.people.each do |person| %>
+        <%= link_to person.name, person_path(person) %>
+      <% end %>
+    <% end %>
+
+    <hr>
+
+    <%= link_to "Edit #{@company.name}", edit_company_path(@company), :class => "btn btn-primary btn-block" %>
   </div>
 
   <div class="col-sm-6 col-md-5">
@@ -46,7 +57,11 @@
     <%= render @notes.last(5) if @notes %>
     <div class="text-center">
       <hr>
-      <%= link_to "View All Notes", company_notes_url(@company), :class => "btn btn-link" %>
+      <% if @notes.count > 5 %>
+        <%= link_to "View All Notes", company_notes_url(@company), :class => "btn btn-link" %>
+      <% elsif @notes.count == 0 %>
+        <p>There are currently no notes for <%= @company.name %>.</p>
+      <% end %>
     </div>
   </div>
   
