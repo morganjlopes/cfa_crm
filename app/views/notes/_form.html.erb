@@ -1,0 +1,38 @@
+<%= simple_form_for([@noteable, @note]) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :body, :label => false %>
+    <div id="want_reminder">
+    	<div class="icon-alarmclock"></div> Reminder
+    </div>
+    <div class="reminder_wrapper">
+    	<%= f.date_field :reminder_ds %>
+    </div>
+    
+    <div id="want_attachment">
+    	<div class="icon-paperclipalt"></div> Attach
+    </div>
+
+    <div class="attachment_wrapper">
+    	<%= f.input :attachment, :label => false %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, :class => "btn btn-primary" %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#want_reminder').click(function(){
+			var item = $(this).attr('name');
+	      $('.reminder_wrapper').toggle();
+		});
+		$('#want_attachment').click(function(){
+			var item = $(this).attr('name');
+	      $('.attachment_wrapper').toggle();
+		});
+	});
+</script>

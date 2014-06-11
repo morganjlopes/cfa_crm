@@ -1,0 +1,20 @@
+// Place all the styles related to the Notes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.media.media_note {
+	ul {
+		margin-bottom: 0px;
+		border-top: 1px solid #E2E2E2;
+		margin-top: 10px;
+		padding-top: 10px;
+	}
+}
+
+.reminder_wrapper, .attachment_wrapper {
+	display: none;
+}
+
+#want_reminder, #want_attachment {
+	margin-bottom: 5px;
+}

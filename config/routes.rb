@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
-  devise_for :users
-  resources :companies
+  resources :notes
 
-  resources :people
+  devise_for :users
+  resources :companies do
+    resources :notes
+  end
+
+  resources :people do
+    resources :notes
+  end
 
   root 'pages#home'
 

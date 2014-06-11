@@ -6,7 +6,7 @@
 <% end %>
 
 <div class="row">
-  <div class="col-md-3">
+  <div class="col-sm-6 col-md-3">
     <!-- Main Photo -->
     <% if @person.photo.present? %>
       <%= image_tag @person.photo, :class => "asset_img" %>
@@ -32,17 +32,25 @@
         <% end %>
       <% end %> 
     </div>
+
+    <% if @person.bio.present? %>
+      <br>
+      <p class="well">
+        <%= @person.bio %>
+      </p>
+    <% end %>
   </div>
-  <div class="col-md-9">
 
-    <p>
-      <strong>Bio:</strong>
-      <%= @person.bio %>
-    </p>
-
-    <p>
-      <strong>Gender:</strong>
-      <%= @person.gender %>
-    </p>
+  <div class="col-sm-6 col-md-5">
+    <h2>Notes</h2>
+    <%= render @notes if @notes %>
+  </div>
+  
+  <div class="col-sm-12 col-md-4">
+    <div class="new_note_wrapper">
+      <h3>New Note</h3>
+      <%= render "notes/form" %>
+    </div>
+    <hr>
   </div>
 </div>

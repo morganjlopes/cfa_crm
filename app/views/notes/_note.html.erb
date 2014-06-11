@@ -1,0 +1,24 @@
+<div class="media media_note">
+	<%= note.body %>
+	<br>
+	<% if note.attachment.present? %>
+		<%= link_to "#{note.attachment}", :class => "pull-right", :target => "_blank" do %>
+			<div class="glyphicon glyphicon-paperclip"></div>Attachment
+		<% end %><br>
+	<% end %>
+	<ul class="list-inline text-right">
+    <li>
+      <%= note.user.email %>
+    </li>
+    <li><em class="text-muted"><%= distance_of_time_in_words(Time.now, note.created_at) %> ago</em></li>
+    <% if current_user %>
+      <% if note.user_id == current_user.id %>
+        <li>
+        	<%= link_to polymorphic_url([@noteable, note]), :confirm => 'Are you sure?', :method => :delete do %>
+        		<div class="icon-trash text-danger"></div>
+        	<% end %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

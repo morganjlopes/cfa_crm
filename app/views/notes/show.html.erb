@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @note.body %>
+</p>
+
+<p>
+  <strong>Reminder ds:</strong>
+  <%= @note.reminder_ds %>
+</p>
+
+<p>
+  <strong>Reminder sent dts:</strong>
+  <%= @note.reminder_sent_dts %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @note.user_id %>
+</p>
+
+<p>
+  <strong>Attachment:</strong>
+  <%= @note.attachment %>
+</p>
+
+<p>
+  <strong>Noteable:</strong>
+  <%= @note.noteable_id %>
+</p>
+
+<p>
+  <strong>Noteable type:</strong>
+  <%= @note.noteable_type %>
+</p>
+
+<%= link_to 'Edit', edit_note_path(@note) %> |
+<%= link_to 'Back', notes_path %>

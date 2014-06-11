@@ -33,12 +33,24 @@
       <% end %> 
     </div>
 
+    <% if @company.bio.present? %>
+      <br>
+      <p class="well">
+        <%= @company.bio %>
+      </p>
+    <% end %>
   </div>
-  <div class="col-md-9">
+
+  <div class="col-sm-6 col-md-5">
+    <h2>Notes</h2>
+    <%= render @notes if @notes %>
+  </div>
+  
+  <div class="col-sm-12 col-md-4">
+    <div class="new_note_wrapper">
+      <h3>New Note</h3>
+      <%= render "notes/form" %>
+    </div>
+    <hr>
   </div>
 </div>
-
-<p>
-  <strong>Bio:</strong>
-  <%= @company.bio %>
-</p>

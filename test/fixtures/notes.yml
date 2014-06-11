@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  body: MyText
+  reminder_ds: 2014-06-11
+  reminder_sent_dts: 2014-06-11 07:41:16
+  user_id: 1
+  attachment: MyString
+  noteable_id: 1
+  noteable_type: MyString
+
+two:
+  body: MyText
+  reminder_ds: 2014-06-11
+  reminder_sent_dts: 2014-06-11 07:41:16
+  user_id: 1
+  attachment: MyString
+  noteable_id: 1
+  noteable_type: MyString

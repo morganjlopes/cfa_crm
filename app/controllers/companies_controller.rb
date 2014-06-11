@@ -12,6 +12,10 @@ class CompaniesController < ApplicationController
   # GET /companies/1
   # GET /companies/1.json
   def show
+    @noteable   = @company
+    @note       = @company.notes.new
+    @notes      = @company.notes.order("created_at desc")
+
     @tab_name = "companies"
   end
 
