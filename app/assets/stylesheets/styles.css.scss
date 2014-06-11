@@ -4,13 +4,14 @@ $blue_hover: rgba(82, 186, 213, 0.75);
 
 .navbar-brand img {
 	max-width: 100px;
+	margin-right: 30px;
 }
 
 .navbar-default {
 	margin-bottom: 0px;
 	border: 0px;
 	.navbar-nav > li > a {
-		font-size: 20px;
+		font-size: 15px;
 		padding: 25px 30px;
 	}
 }
@@ -25,6 +26,12 @@ $blue_hover: rgba(82, 186, 213, 0.75);
 		border-color: $blue_hover;
 		color: $blue_hover;
 	}
+}
+
+.asset_img {
+	border: 3px solid #AAA;
+	padding: 10px;
+	margin-bottom: 20px;
 }
 
 .heading {

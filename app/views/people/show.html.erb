@@ -5,43 +5,44 @@
   </h1>
 <% end %>
 
-<div class="social_icons">
-  <% @person.digital_addresses.order("address_type asc").each do |digi| %>
-    <% if digi.address_type > 2 %>
-      <%= link_to digi.url, :target => "_blank" do %>
-        <div class="<%= digi.icon %>"></div>
-      <% end %>
-    <% elsif digi.address_type > 1 %>
-      <%= link_to "mailto:#{digi.url}", :target => "_blank" do %>
-        <div class="<%= digi.icon %>"></div> <%= digi.url %>
-      <% end %><br>
+<div class="row">
+  <div class="col-md-3">
+    <!-- Main Photo -->
+    <% if @person.photo.present? %>
+      <%= image_tag @person.photo, :class => "asset_img" %>
     <% else %>
-      <%= link_to "tel:+#{digi.url}", :target => "_blank" do %>
-        <div class="<%= digi.icon %>"></div> <%= digi.url %>
-      <% end %><br>
+      <%= image_tag "default_photo.jpg", :class => "asset_img" %>
     <% end %>
-  <% end %> 
+
+    <!-- Contact Info -->
+    <div class="social_icons">
+      <% @person.digital_addresses.order("address_type asc").each do |digi| %>
+        <% if digi.address_type > 2 %>
+          <%= link_to digi.url, :target => "_blank" do %>
+            <div class="<%= digi.icon %>"></div>
+          <% end %>
+        <% elsif digi.address_type > 1 %>
+          <%= link_to "mailto:#{digi.url}", :target => "_blank" do %>
+            <div class="<%= digi.icon %>"></div> <%= digi.url %>
+          <% end %><br>
+        <% else %>
+          <%= link_to "tel:+#{digi.url}", :target => "_blank" do %>
+            <div class="<%= digi.icon %>"></div> <%= digi.url %>
+          <% end %><br>
+        <% end %>
+      <% end %> 
+    </div>
+  </div>
+  <div class="col-md-9">
+
+    <p>
+      <strong>Bio:</strong>
+      <%= @person.bio %>
+    </p>
+
+    <p>
+      <strong>Gender:</strong>
+      <%= @person.gender %>
+    </p>
+  </div>
 </div>
-
-<p>
-  <strong>Bio:</strong>
-  <%= @person.bio %>
-</p>
-
-<p>
-  <strong>Gender:</strong>
-  <%= @person.gender %>
-</p>
-
-<p>
-  <strong>Photo:</strong>
-  <%= @person.photo %>
-</p>
-
-<p>
-  <strong>Slug:</strong>
-  <%= @person.slug %>
-</p>
-
-<%= link_to 'Edit', edit_person_path(@person) %> |
-<%= link_to 'Back', people_path %>
