@@ -15,16 +15,37 @@
             <tr>
               <td><%= d_address.input :url, label: false %></td>
               <td><%= d_address.collection_select(:address_type, DigitalAddress::address_types, :first, :last) %></td>
+              <td></td>
             </tr>
           <% end %>
         </table>
-        <a id="add_web_button" onclick="return false;" class="btn btn-sm btn-default" href="">
-        <div class="glyphicon glyphicon-plus"></div> Add Web Address</a>
+        <%= link_to "", :onClick => "return false;", :id => "add_web_button", :class => "btn btn-sm btn-default pull-right" do %>
+          <div class="glyphicon glyphicon-plus"></div> Add Web Address
+        <% end %>
       </div>
+
+      <legend>Employment</legend>
+      <table class="full_width">
+        <tr>
+          <th>Company</th>
+          <th>Role</th>
+        </tr>
+        <%= f.association :employments do |e| %>
+          <tr>
+            <td><%= e.input :company, collection: (Company.all), :label => false %></td>
+            <td><%= e.input :role, :label => false %></td>
+          </tr>
+        <% end %>
+      </table>
     </div>
 
     <div class="form-actions">
-      <%= f.button :submit, :class => "btn btn-primary" %>
+      <% if @person.id %>
+        <%= link_to 'Delete Person', person_path(@person), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn text-danger pull-left" %>
+      <% else %>
+        <%= link_to 'Cancel Person', people_path,  data: { confirm: 'Are you sure? All information will be lost, FOREVER!' }, :class => "btn text-danger pull-left" %>
+      <% end %>
+      <%= f.button :submit, :class => "btn btn-primary pull-right" %>
     </div>
   <% end %>
 </div>

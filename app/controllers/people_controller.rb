@@ -5,20 +5,26 @@ class PeopleController < ApplicationController
   # GET /people.json
   def index
     @people = Person.all
+    @tab_name = "people"
   end
 
   # GET /people/1
   # GET /people/1.json
   def show
+    @tab_name = "people"
   end
 
   # GET /people/new
   def new
     @person = Person.new
+    @person.digital_addresses.build
+    @person.employments.build
+    @tab_name = "people"
   end
 
   # GET /people/1/edit
   def edit
+    @tab_name = "people"
   end
 
   # POST /people

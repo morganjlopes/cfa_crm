@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140610115426) do
+ActiveRecord::Schema.define(version: 20140610124925) do
+
+  create_table "companies", force: true do |t|
+    t.string   "name"
+    t.text     "bio"
+    t.string   "slug"
+    t.string   "photo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "digital_addresses", force: true do |t|
     t.integer  "address_type",     default: 1
@@ -19,6 +28,14 @@ ActiveRecord::Schema.define(version: 20140610115426) do
     t.string   "addressable_type"
     t.integer  "addressable_id"
     t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "employments", force: true do |t|
+    t.integer  "person_id"
+    t.integer  "company_id"
+    t.string   "role"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,0 +1,54 @@
+<div class="general_form_wrapper">
+  <%= simple_form_for(@company) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <%= f.input :name %>
+      <%= f.input :bio %>
+      <%= f.input :photo %>
+
+      <legend>Digital Addresses</legend>
+      <div class="">
+        <table id="digital_address_table" class="full_width">
+          <%= f.association :digital_addresses do |d_address| %>
+            <tr>
+              <td><%= d_address.input :url, label: false %></td>
+              <td><%= d_address.collection_select(:address_type, DigitalAddress::address_types, :first, :last) %></td>
+            </tr>
+          <% end %>
+        </table>
+        <a id="add_web_button" onclick="return false;" class="btn btn-sm btn-default" href="">
+        <div class="glyphicon glyphicon-plus"></div> Add Web Address</a>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <% if @company.id %>
+        <%= link_to 'Delete Company', company_path(@company), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn text-danger pull-left" %>
+      <% else %>
+        <%= link_to 'Cancel Company', companies_path,  data: { confirm: 'Are you sure? All information will be lost, FOREVER!' }, :class => "btn text-danger pull-left" %>
+      <% end %>
+      <%= f.button :submit, :class => "btn btn-primary pull-right" %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  // Add Digital Address Script
+  $(document).ready(function(){
+    var i = <%= @company.digital_addresses.count %>;
+    var options = '<%= raw options_from_collection_for_select(DigitalAddress.address_types, :first, :last).squish.gsub('> <', '><') %>';
+
+    $("#add_web_button").click(function(){
+      i ++;
+      $("#digital_address_table").append('<tr id="digi_'+i+'""><td><div class="input url optional company_digital_addresses_url"><input class="string url optional" id="company_digital_addresses_attributes_'+i+'_url" name="company[digital_addresses_attributes]['+i+'][url]" type="url" value="http://"></div></td><td><select id="company_digital_addresses_attributes_'+i+'_address_type" name="company[digital_addresses_attributes]['+i+'][address_type]">' + options + '</select></td><td><div class="remove_column">x</div></td></tr>');
+    });
+  });
+
+  // Remove Row Script
+  $(document).ready(function(){
+    $('table').on('click', '.remove_column', function(e){
+       $(this).closest('tr').remove()
+    })
+   });
+</script>

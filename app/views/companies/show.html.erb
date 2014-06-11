@@ -1,0 +1,19 @@
+<%= content_for :heading do %>
+  <h1>
+    <small>Connected on <%= @company.created_at.strftime("%b %e, %Y") %></small><br>
+    <%= @company.name %>
+  </h1>
+<% end %>
+
+<p>
+  <strong>Bio:</strong>
+  <%= @company.bio %>
+</p>
+
+<p>
+  <strong>Photo:</strong>
+  <%= @company.photo %>
+</p>
+
+<%= link_to 'Edit', edit_company_path(@company) %> |
+<%= link_to 'Back', companies_path %>
