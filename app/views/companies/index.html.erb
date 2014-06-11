@@ -5,6 +5,24 @@
   </h1>
 <% end %>
 
+<div class="row">
+  <div class="col-sm-4">
+    <%= search_form_for @search do |f| %>
+      <div class="input-group">
+        <%= f.text_field :name_cont, :class => "form-control" %>
+        <span class="input-group-btn">
+          <%= f.submit "Search", :class => "btn btn-primary" %>
+        </span>
+      </div><!-- /input-group -->
+    <% end %>
+  </div>
+  <div class="col-sm-4 col-sm-offset-4">
+    <%= link_to 'New Company', new_company_path, :class => "btn btn-primary pull-right" %>
+  </div>
+</div>
+
+<hr>
+
 <table class="table">
   <thead>
     <tr>
@@ -29,7 +47,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Company', new_company_path, :class => "btn btn-primary" %>

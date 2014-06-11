@@ -5,7 +5,9 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.json
   def index
-    @people = Person.all
+    @search = Person.search(params[:q])
+    @people = @search.result
+
     @tab_name = "people"
   end
 

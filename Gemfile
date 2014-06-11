@@ -35,6 +35,9 @@ gem 'simple_form'
 # Auth
 gem 'devise'
 
+# Basic Search
+gem "ransack", github: "activerecord-hackery/ransack", branch: "rails-4.1"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
