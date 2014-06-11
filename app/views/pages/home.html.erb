@@ -1,0 +1,16 @@
+<%= content_for :heading do %>
+  <h1 class="text-center">
+    <small>Start Here</small><br>
+    Build a Healthy Community
+  </h1>
+<% end %>
+
+<div class="row">
+	<div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+		<h2 class="text-center">Connections Await</h2>
+		<p>Connecting to a growing community takes time, intentionality, and continuous engagement. We are here to make that easier.</p>
+		<hr>
+		<%= link_to "Signup", new_user_registration_path, :class => "btn btn-primary btn-lg btn-block" %>
+		<%= link_to "Already Registered?", new_user_session_path, :class => "btn btn-link pull-right" %>
+	</div>
+</div>
