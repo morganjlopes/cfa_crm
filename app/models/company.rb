@@ -11,4 +11,20 @@ class Company < ActiveRecord::Base
 
 	accepts_nested_attributes_for :digital_addresses
 	accepts_nested_attributes_for :address
+
+	COMPANY_TYPE_BUSINESS      = 1
+  COMPANY_TYPE_NONPROFIT     = 2
+  COMPANY_TYPE_SCHOOL        = 3
+  COMPANY_TYPE_CHURCH        = 4
+  COMPANY_TYPE_PERSONAL      = 5
+
+  def self.company_types
+    {
+      Company::COMPANY_TYPE_BUSINESS     => 'Business',
+      Company::COMPANY_TYPE_NONPROFIT    => 'Nonprofit',
+      Company::COMPANY_TYPE_SCHOOL       => 'School',
+      Company::COMPANY_TYPE_CHURCH       => 'Church',
+      Company::COMPANY_TYPE_PERSONAL     => 'Personal'
+    }
+  end
 end
