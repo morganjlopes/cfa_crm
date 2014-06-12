@@ -23,45 +23,36 @@
 
 <hr>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Companies</th>
-      <th>Connect</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="row">
+  <% @people.order("name asc").each do |person| %>
+    <div class="col-xs-6 col-sm-4 col-md-3">
+      <%= link_to person_path(person) do %>
+        <div class="asset_preview">
+          <% if person.photo.present? %>
+            <%= image_tag person.photo, :class => "asset_img" %>
+          <% else %>
+            <%= image_tag "default_person.png", :class => "asset_img" %>
+          <% end %>
 
-  <tbody>
-    <% @people.order("name asc").each do |person| %>
-      <tr>
-        <td><%= person.name %></td>
-        <td><%= raw person.companies.map {|c| link_to c.name, company_path(c)}.join(", ") %></td>
-        <td>
-          <% person.digital_addresses.order("address_type asc").each do |digi| %>
-            <% if digi.address_type > 2 %>
-              <%= link_to digi.url, :target => "_blank" do %>
-                <div class="<%= digi.icon %>"></div>
+          <div>
+            <h2><%= person.name %></h2>
+
+            <div class="asset_preview_social text-center">
+              <% person.digital_addresses.order("address_type asc").each do |digi| %>
+                <%= link_to digi.link_to, :target => "_blank" do %>
+                  <div class="<%= digi.icon %>"></div>
+                <% end %>
               <% end %>
-            <% elsif digi.address_type > 1 %>
-              <%= link_to "mailto:#{digi.url}", :target => "_blank" do %>
-                <div class="<%= digi.icon %>"></div>
-              <% end %>
-            <% else %>
-              <%= link_to "tel:+#{digi.url}", :target => "_blank" do %>
-                <div class="<%= digi.icon %>"></div>
-              <% end %>
-            <% end %>
-          <% end %> 
-        </td>
-        <td>
-          <div class="btn-group pull-right">
-            <%= link_to 'Show', person, :class => "btn btn-default btn-sm" %>
-            <%= link_to 'Edit', edit_person_path(person), :class => "btn btn-default btn-sm" %>
+            </div>
+
+            <div class="btn-group btn-group-justified">
+              <%= link_to "Show", person, :class => "btn btn-primary" %>
+              <%= link_to "Edit", edit_person_path(person), :class => "btn btn-primary" %>
+            </div>
           </div>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+

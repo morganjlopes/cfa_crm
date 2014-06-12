@@ -24,12 +24,16 @@ class CompaniesController < ApplicationController
   # GET /companies/new
   def new
     @company = Company.new
+    @company.build_address
     @company.digital_addresses.build
     @tab_name = "companies"
   end
 
   # GET /companies/1/edit
   def edit
+    unless @company.address.present?
+      @company.build_address
+    end
     @tab_name = "companies"
   end
 
@@ -85,6 +89,7 @@ class CompaniesController < ApplicationController
                                       :bio,
                                       :slug,
                                       :photo,
-                                      digital_addresses_attributes: [:id, :name, :address_type, :url],)
+                                      digital_addresses_attributes: [:id, :name, :address_type, :url],
+                                      address_attributes: [:id, :street_line_1, :street_line_2, :city, :state, :zip])
     end
 end

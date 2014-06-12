@@ -8,6 +8,28 @@
       <%= f.input :bio %>
       <%= f.input :gender %>
       <%= f.input :photo %>
+
+      <legend>Physical Address</legend>
+      <%= f.association :address do |a| %>
+        <div class="row">
+          <div class="col-md-12">
+            <%= a.input :street_line_1 %>
+          </div>
+          <div class="col-md-12">
+            <%= a.input :street_line_2 %>
+          </div>
+          <div class="col-md-5">
+            <%= a.input :city, :placeholder => "Atlanta" %>
+          </div>
+          <div class="col-md-4">
+            <%= a.input :state, collection: (Address.states), :prompt => 'State...' %>
+          </div>
+          <div class="col-md-3">
+            <%= a.input :zip, :placeholder => "30303" %>
+          </div>
+        </div>
+      <% end %>
+      
       <legend>Digital Addresses</legend>
       <div class="">
         <table id="digital_address_table" class="full_width">

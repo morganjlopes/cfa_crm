@@ -48,6 +48,7 @@ $blue_hover: rgba(82, 186, 213, 0.75);
 
 .asset_img {
 	border: 3px solid #E2E2E2;
+	background-color: #FFF;
 	padding: 10px;
 	margin-bottom: 20px;
 }
@@ -92,6 +93,22 @@ $blue_hover: rgba(82, 186, 213, 0.75);
 	margin-top: 20px;
 	margin-bottom: 20px;
 	padding-top: 20px;
+}
+
+.asset_preview {
+	h2 {
+		margin-top: 0px;
+		font-size: 20px;
+	}
+	.asset_preview_social {
+		margin-bottom: 10px;
+		[class^="icon-"] {
+			margin: 0px 4px;
+		}
+	}
+	.asset_img {
+		margin-bottom: 10px;
+	}
 }
 
 input[type="text"],

@@ -35,6 +35,16 @@ class DigitalAddress < ActiveRecord::Base
     }
   end
 
+  def link_to
+    if address_type == 1
+      "tel:+#{url}"
+    elsif address_type == 2
+      "mailto:#{url}"
+    else
+      "#{url}"
+    end
+  end
+
   def icon
     case address_type
       when ADDRESS_TYPE_PHONE

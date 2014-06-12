@@ -11,7 +11,7 @@
     <% if @company.photo.present? %>
       <%= image_tag @company.photo, :class => "asset_img" %>
     <% else %>
-      <%= image_tag "default_photo.jpg", :class => "asset_img" %>
+      <%= image_tag "default_company.png", :class => "asset_img" %>
     <% end %>
 
     <!-- Contact Info -->
@@ -38,6 +38,11 @@
       <p class="well">
         <%= @company.bio %>
       </p>
+    <% end %>
+
+    <% if @company.address.present? %>
+      <br>
+      <pre><%= @company.address.mappable_address %></pre>
     <% end %>
 
     <% if @company.people %>

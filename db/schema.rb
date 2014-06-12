@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140611114116) do
+ActiveRecord::Schema.define(version: 20140612003056) do
+
+  create_table "addresses", force: true do |t|
+    t.string   "street_line_1"
+    t.string   "street_line_2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "companies", force: true do |t|
     t.string   "name"
@@ -20,6 +32,7 @@ ActiveRecord::Schema.define(version: 20140611114116) do
     t.string   "photo"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "address_id"
   end
 
   create_table "digital_addresses", force: true do |t|
@@ -73,6 +86,7 @@ ActiveRecord::Schema.define(version: 20140611114116) do
     t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "address_id"
   end
 
   create_table "users", force: true do |t|
