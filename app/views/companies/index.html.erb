@@ -23,6 +23,16 @@
 
 <hr>
 
+<div>
+  <ul class="nav nav-pills">
+    <li class="pull-right <%= "active" unless params[:company_type] %>"><%= link_to "All",  url_for(:company_type => nil) %></li>
+    <% Company.company_types.each do |type| %>
+      <li class="pull-right <%= "active" if params[:company_type] == "#{type.first}" %>"><%= link_to type.last, url_for(:company_type => type.first) %></li>
+    <% end %>
+  </ul>
+  <br>
+</div>
+
 <div class="row">
   <% @companies.order("name asc").each do |company| %>
     <div class="col-xs-6 col-sm-4 col-md-3">

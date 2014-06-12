@@ -5,7 +5,11 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.json
   def index
-    @search = Company.search(params[:q])
+    if params[:company_type]
+      @search = Company.where(:company_type => params[:company_type]).search(params[:q])
+    else
+      @search = Company.search(params[:q])
+    end
     @companies = @search.result
 
     @tab_name = "companies"
