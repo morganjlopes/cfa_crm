@@ -1,13 +1,16 @@
-<div class="general_form_wrapper">
-  <%= simple_form_for(@person) do |f| %>
-    <%= f.error_notification %>
 
-    <div class="form-inputs">
+<%= simple_form_for(@person) do |f| %>
+  <%= f.error_notification %>
+  <div class="row">
+    <div class="col-md-6">
+
       <legend>General Information</legend>
       <%= f.input :name %>
       <%= f.input :bio %>
       <%= f.input :gender %>
       <%= f.input :photo %>
+
+      <%= f.input :date_of_birth, :include_blank => true, :default => nil, ampm: true, :order => [:month, :day,:year], start_year: Time.now.year - 90 %>
 
       <legend>Physical Address</legend>
       <%= f.association :address do |a| %>
@@ -29,50 +32,66 @@
           </div>
         </div>
       <% end %>
-      
+    </div>
+    <div class="col-md-6">
       <legend>Digital Addresses</legend>
       <div class="">
         <table id="digital_address_table" class="full_width">
+          <tr>
+            <th>Reference</th>
+            <th>Type</th>
+          </tr>
           <%= f.association :digital_addresses do |d_address| %>
             <tr>
-              <td><%= d_address.input :url, label: false %></td>
+              <td><%= d_address.input :url, label: false, :placeholder => "you@example.com" %></td>
               <td><%= d_address.collection_select(:address_type, DigitalAddress::address_types, :first, :last) %></td>
               <td></td>
             </tr>
           <% end %>
         </table>
-        <%= link_to "", :onClick => "return false;", :id => "add_web_button", :class => "btn btn-sm btn-default pull-right" do %>
-          <div class="glyphicon glyphicon-plus"></div> Add Web Address
-        <% end %>
+        <div class="text-right">
+          <%= link_to "", :onClick => "return false;", :id => "add_web_button", :class => "btn btn-sm btn-default pull-right" do %>
+            <div class="glyphicon glyphicon-plus"></div> Add Web Address
+          <% end %>
+        </div>
       </div>
 
       <legend>Employment</legend>
-      <table class="full_width">
-        <tr>
-          <th>Company</th>
-          <th>Role</th>
-        </tr>
-        <%= f.association :employments do |e| %>
+      <div class="">
+        <table id="employment_table" class="full_width">
           <tr>
-            <td><%= e.input :company_id, collection: (Company.all), label_method: :name, value_method: :id, :label => false %></td>
-            <td><%= e.input :role, :label => false %></td>
+            <th>Company</th>
+            <th>Role</th>
           </tr>
+          <%= f.association :employments do |e| %>
+            <tr>
+              <td><%= e.input :company_id, collection: (Company.all), label_method: :name, value_method: :id, :label => false %></td>
+              <td><%= e.input :role, :label => false %></td>
+            </tr>
+          <% end %>
+        </table>
+        <div class="text-right">
+          <%= link_to "", :onClick => "return false;", :id => "add_company", :class => "btn btn-sm btn-default pull-right" do %>
+            <div class="glyphicon glyphicon-plus"></div> Add Company
+          <% end %>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="form-actions">
+        <% if @person.id %>
+          <%= link_to 'Delete Person', person_path(@person), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn text-danger pull-left" %>
+        <% else %>
+          <%= link_to 'Cancel Person', people_path,  data: { confirm: 'Are you sure? All information will be lost, FOREVER!' }, :class => "btn text-danger pull-left" %>
         <% end %>
-      </table>
+        <%= f.button :submit, :class => "btn btn-primary pull-right" %>
+      </div>
     </div>
+  </div>
+<% end %>
 
-    <div class="form-actions">
-      <% if @person.id %>
-        <%= link_to 'Delete Person', person_path(@person), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn text-danger pull-left" %>
-      <% else %>
-        <%= link_to 'Cancel Person', people_path,  data: { confirm: 'Are you sure? All information will be lost, FOREVER!' }, :class => "btn text-danger pull-left" %>
-      <% end %>
-      <%= f.button :submit, :class => "btn btn-primary pull-right" %>
-    </div>
-  <% end %>
-</div>
-
-<script>
+<script type="text/javascript">
   // Add Digital Address Script
   $(document).ready(function(){
     var i = <%= @person.digital_addresses.count %>;
@@ -81,6 +100,17 @@
     $("#add_web_button").click(function(){
       i ++;
       $("#digital_address_table").append('<tr id="digi_'+i+'""><td><div class="input url optional person_digital_addresses_url"><input class="string url optional" id="person_digital_addresses_attributes_'+i+'_url" name="person[digital_addresses_attributes]['+i+'][url]" type="url" value="http://"></div></td><td><select id="person_digital_addresses_attributes_'+i+'_address_type" name="person[digital_addresses_attributes]['+i+'][address_type]">' + options + '</select></td><td><div class="remove_column">x</div></td></tr>');
+    });
+  });
+
+  // Add Digital Address Script
+  $(document).ready(function(){
+    var i = <%= @person.companies.count %>;
+    var options = '<%= raw options_from_collection_for_select(Company.all, :id, :name).squish.gsub('> <', '><') %>';
+
+    $("#add_company").click(function(){
+      i ++;
+      $("#employment_table").append('<tr><td><div class="input select optional person_employments_company_id"><select class="select optional" id="person_employments_attributes_'+i+'_company_id" name="person[employments_attributes]['+i+'][company_id]">' + options + '</select></div></td><td><div class="input string optional person_employments_role"><input class="string optional" id="person_employments_attributes_'+i+'_role" name="person[employments_attributes]['+i+'][role]" type="text" value=""></div></td></tr>');
     });
   });
 

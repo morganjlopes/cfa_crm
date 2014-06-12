@@ -1,8 +1,9 @@
-<div class="general_form_wrapper">
-  <%= simple_form_for(@company) do |f| %>
-    <%= f.error_notification %>
 
-    <div class="form-inputs">
+<%= simple_form_for(@company) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="row">
+    <div class="col-md-6">
       <%= f.input :name %>
       <%= f.input :company_type, collection: (Company.company_types), label_method: :last, value_method: :first, :include_blank => false %>
       <%= f.input :bio %>
@@ -28,6 +29,8 @@
           </div>
         </div>
       <% end %>
+    </div>
+    <div class="col-md-6">
 
       <legend>Digital Addresses</legend>
       <div class="">
@@ -39,21 +42,26 @@
             </tr>
           <% end %>
         </table>
-        <a id="add_web_button" onclick="return false;" class="btn btn-sm btn-default" href="">
-        <div class="glyphicon glyphicon-plus"></div> Add Web Address</a>
+        <div class="text-right">
+          <%= link_to "", :onClick => "return false;", :id => "add_web_button", :class => "btn btn-sm btn-default pull-right" do %>
+            <div class="glyphicon glyphicon-plus"></div> Add Web Address
+          <% end %>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="form-actions">
+        <% if @company.id %>
+          <%= link_to 'Delete Company', company_path(@company), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn text-danger pull-left" %>
+        <% else %>
+          <%= link_to 'Cancel Company', companies_path,  data: { confirm: 'Are you sure? All information will be lost, FOREVER!' }, :class => "btn text-danger pull-left" %>
+        <% end %>
+        <%= f.button :submit, :class => "btn btn-primary pull-right" %>
       </div>
     </div>
-
-    <div class="form-actions">
-      <% if @company.id %>
-        <%= link_to 'Delete Company', company_path(@company), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn text-danger pull-left" %>
-      <% else %>
-        <%= link_to 'Cancel Company', companies_path,  data: { confirm: 'Are you sure? All information will be lost, FOREVER!' }, :class => "btn text-danger pull-left" %>
-      <% end %>
-      <%= f.button :submit, :class => "btn btn-primary pull-right" %>
-    </div>
-  <% end %>
-</div>
+  </div>
+<% end %>
 
 <script>
   // Add Digital Address Script
