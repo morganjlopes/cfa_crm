@@ -54,7 +54,7 @@
         </tr>
         <%= f.association :employments do |e| %>
           <tr>
-            <td><%= e.input :company_id, collection: (Company.all), label_method: :name, value_method: :id, :label => false, :include_blank => false %></td>
+            <td><%= e.input :company_id, collection: (Company.all), label_method: :name, value_method: :id, :label => false %></td>
             <td><%= e.input :role, :label => false %></td>
           </tr>
         <% end %>
