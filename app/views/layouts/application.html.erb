@@ -44,6 +44,11 @@
                 <% end %>
               </li>
               <li>
+                <%= link_to new_user_invitation_path do %>
+                  <div class="icon-addfriend"></div> Invite Coworker
+                <% end %>
+              </li>
+              <li>
                 <%= link_to destroy_user_session_path, method: :delete do %>
                   <div class="icon-exit"></div> Logout
                 <% end %>
