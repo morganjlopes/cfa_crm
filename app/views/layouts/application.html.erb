@@ -31,6 +31,9 @@
           <li class="<%= "active" if @tab_name == "companies" %>">
             <%= link_to "Companies", companies_path %>
           </li>
+          <li class="<%= "active" if @tab_name == "messages" %>">
+            <%= link_to "Messages", messages_path %>
+          </li>
         </ul>
       <% end %>
       <ul class="nav navbar-nav navbar-right">
