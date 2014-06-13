@@ -32,7 +32,8 @@ gem 'friendly_id', '~> 5.0.0'
 gem 'simple_form'
 
 # Auth
-gem 'devise'
+gem 'devise',           '>= 3.0.0'
+gem 'devise_invitable', '~> 1.3.4'
 
 # Basic Search
 gem "ransack", github: "activerecord-hackery/ransack", branch: "rails-4.1"
