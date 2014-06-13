@@ -18,6 +18,9 @@ class Company < ActiveRecord::Base
   COMPANY_TYPE_CHURCH        = 4
   COMPANY_TYPE_PERSONAL      = 5
 
+  validates_presence_of :name,
+                        :company_type
+
   def self.company_types
     {
       Company::COMPANY_TYPE_BUSINESS     => 'Business',

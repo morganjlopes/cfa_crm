@@ -8,7 +8,7 @@
       <%= f.input :is_employee, :label => "Your Coworker" %>
       <%= f.input :name %>
       <%= f.input :bio %>
-      <%= f.input :gender %>
+      <%= f.input :gender, as: :check_boxes, collection: (Person.genders), label_method: :last, value_method: :first %>
       <%= f.input :photo %>
 
       <%= f.input :date_of_birth, input_html: { :class => "form-control"}, :include_blank => true, :default => nil, ampm: true, :order => [:month, :day,:year], start_year: Time.now.year - 90 %>
@@ -100,7 +100,7 @@
 
     $("#add_web_button").click(function(){
       i ++;
-      $("#digital_address_table").append('<tr id="digi_'+i+'""><td><div class="input url optional person_digital_addresses_url"><input class="string url optional form-control" id="person_digital_addresses_attributes_'+i+'_url" name="person[digital_addresses_attributes]['+i+'][url]" type="url" value="http://"></div></td><td><select id="person_digital_addresses_attributes_'+i+'_address_type" name="person[digital_addresses_attributes]['+i+'][address_type]">' + options + '</select></td><td><div class="remove_column">x</div></td></tr>');
+      $("#digital_address_table").append('<tr id="digi_'+i+'""><td><div class="input url optional person_digital_addresses_url"><input class="string url optional" id="person_digital_addresses_attributes_'+i+'_url" name="person[digital_addresses_attributes]['+i+'][url]" type="url" value="http://"></div></td><td><select id="person_digital_addresses_attributes_'+i+'_address_type" name="person[digital_addresses_attributes]['+i+'][address_type]" class="form-control">' + options + '</select></td><td><div class="remove_column">x</div></td></tr>');
     });
   });
 

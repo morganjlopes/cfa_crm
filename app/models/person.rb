@@ -12,8 +12,30 @@ class Person < ActiveRecord::Base
 	has_many :notes, as: :noteable, :dependent => :destroy
 
 	accepts_nested_attributes_for :address
+	accepts_nested_attributes_for :companies
 	accepts_nested_attributes_for :digital_addresses
 	accepts_nested_attributes_for :employments
+
+	validates_presence_of :name
+
+	GENDER_MALE			 = 1
+	GENDER_FEMALE 	 = 2
+
+	def self.genders
+    {
+			Person::GENDER_MALE			  => 'Male',
+			Person::GENDER_FEMALE		  => 'Female',
+		}
+	end
+
+	def gender_to_string
+		case gender
+			when GENDER_MALE
+				"Male"
+			when GENDER_FEMALE
+				"Female"
+		end
+	end
 
 	def first_name
     name.scan(/\w+/).first

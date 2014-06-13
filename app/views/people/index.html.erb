@@ -7,7 +7,7 @@
 
 <div class="row">
   <div class="col-sm-4">
-    <%= search_form_for @search do |f| %>
+    <%= search_form_for @search, :class => "search_form" do |f| %>
       <div class="input-group">
         <%= f.text_field :name_cont, :class => "form-control" %>
         <span class="input-group-btn">
@@ -22,6 +22,21 @@
 </div>
 
 <hr>
+
+<div>
+  <ul class="nav nav-pills">
+    <li class="pull-right <%= "active" unless params[:person_type] %>">
+      <%= link_to "All",  url_for(:person_type => nil) %>
+    </li>
+    <li class="pull-right <%= "active" if params[:person_type] == "customers" %>">
+      <%= link_to "Customers",  url_for(:person_type => "customers") %>
+    </li>
+    <li class="pull-right <%= "active" if params[:person_type] == "coworkers" %>">
+      <%= link_to "Coworkers",  url_for(:person_type => "coworkers") %>
+    </li>
+  </ul>
+  <br>
+</div>
 
 <div class="row">
   <% @people.order("name asc").each do |person| %>

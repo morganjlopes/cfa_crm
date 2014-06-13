@@ -1,6 +1,9 @@
 class DigitalAddress < ActiveRecord::Base
 	belongs_to :addressable, polymorphic: true
 
+  validates_presence_of :url,
+                        :address_type
+
 	ADDRESS_TYPE_PHONE			 = 1
 	ADDRESS_TYPE_EMAIL			 = 2
 	ADDRESS_TYPE_WEBSITE     = 3

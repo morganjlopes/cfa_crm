@@ -39,6 +39,10 @@ $blue_hover: rgba(82, 186, 213, 0.75);
 	}
 }
 
+.btn-group-justified {
+	display: block;
+}
+
 .full_width {
 	width: 100%;
 }
@@ -72,6 +76,7 @@ $blue_hover: rgba(82, 186, 213, 0.75);
 	}
 	.asset_preview_social {
 		margin-bottom: 10px;
+		min-height: 20px;
 		[class^="icon-"] {
 			margin: 0px 4px;
 		}
@@ -126,6 +131,10 @@ textarea {
 	box-shadow: none;
 	-webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.search_form .form-control {
+	height: 35px;
 }
 
 .remove_column {
@@ -227,3 +236,10 @@ textarea {
   	background-image: none;
   }
 }
+
+@media only screen and (max-width: 768px) {
+	.navbar-brand img {
+		max-width: 55px;
+	}
+}
+

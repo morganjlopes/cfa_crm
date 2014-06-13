@@ -5,8 +5,14 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.json
   def index
-    @search = Person.search(params[:q])
-    @people = @search.result
+    if params[:person_type] == "customers"
+      @search = Person.where(:is_employee => false).search(params[:q])
+    elsif params[:person_type] == "coworkers"
+      @search = Person.where(:is_employee => true).search(params[:q])
+    else
+      @search = Person.search(params[:q])
+    end
+      @people = @search.result
 
     @tab_name = "people"
   end
@@ -26,12 +32,14 @@ class PeopleController < ApplicationController
     @person = Person.new
     @person.build_address
     @person.digital_addresses.build
+    @person.companies.build
     @person.employments.build
     @tab_name = "people"
   end
 
   # GET /people/1/edit
   def edit
+    @person.companies.build
     unless @person.employments.present?
       @person.employments.build
     end
@@ -87,6 +95,7 @@ class PeopleController < ApplicationController
                                      :gender,
                                      :photo,
                                      :slug,
+                                     companies_attributes: [:id, :name],
                                      digital_addresses_attributes: [:id, :name, :address_type, :url],
                                      employments_attributes: [:id, :company_id, :role],
                                      address_attributes: [:id, :street_line_1, :street_line_2, :city, :state, :zip])

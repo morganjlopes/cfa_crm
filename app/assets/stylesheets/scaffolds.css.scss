@@ -10,6 +10,7 @@ p, ol, ul, td {
   font-family: 'Source-Sans-Pro', verdana, arial, helvetica, sans-serif;
   font-size: 16px;
   line-height: 25px;
+  vertical-align: top;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -58,9 +59,20 @@ legend {
 }
 
 .field_with_errors {
+  font-family: 'Source-Sans-Pro', verdana, arial, helvetica, sans-serif;
   padding: 2px;
-  background-color: red;
-  display: table;
+  background-color: #F00;
+  display: block;
+  color: #FFF;
+  text-align: center;
+  padding-bottom: 10px;
+  border-radius: 2px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  label {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
 }
 
 #error_explanation {
