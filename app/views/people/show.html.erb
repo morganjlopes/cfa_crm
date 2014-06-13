@@ -40,12 +40,7 @@
       </p>
     <% end %>
 
-    <% if @person.address.present? %>
-      <br>
-      <pre><%= @person.address.mappable_address %></pre>
-    <% end %>
-
-    <% if @person.companies %>
+    <% if @person.companies.present? %>
       <h3>Companies</h3>
       <% @person.companies.each do |company| %>
         <%= link_to company.name, company_path(company) %>
@@ -56,8 +51,11 @@
   <div class="col-sm-6 col-md-9">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs">
-      <li class="active"><a href="#notes" data-toggle="tab">Notes</a></li>
-      <li><a href="#messages" data-toggle="tab">Messages</a></li>
+      <li class="active"><a href="#notes" data-toggle="tab"><div class="icon-noteslist"></div> Notes</a></li>
+      <li><a href="#messages" data-toggle="tab"><div class="icon-inbox"></div> Messages</a></li>
+      <% if @person.address.city.present? %>
+        <li><a href="#address" data-toggle="tab"><div class="icon-map-marker"></div> Address</a></li>
+      <% end %>
       <li class="pull-right"><%= link_to "Edit #{@person.first_name}'s Info", edit_person_path(@person) %></li>
     </ul>
 
@@ -68,17 +66,19 @@
           <div class="col-sm-6 col-md-7">
             <%= render @notes.last(5) if @notes %>
 
-            <div class="text-center">
-              <% if @notes.count > 5 %>
+            <% if @notes.count > 5 %>
+              <div class="text-center">
                 <%= link_to "View All Notes", person_notes_url(@person), :class => "btn btn-link" %>
-              <% elsif @notes.count == 0 %>
+              </div>
+            <% elsif @notes.count == 0 %>
+              <div class="text-center">
                 <p>There are currently no notes for <%= @person.first_name %>.</p>
-              <% end %>
-            </div>
+              </div>
+            <% end %>
           </div>
           <div class="col-sm-6 col-md-5">
             <div class="new_note_wrapper">
-              <h3>New Note</h3>
+              <h3 class="new_note_heading">New Note</h3>
               <%= render "notes/form" %>
             </div>
           </div>
@@ -110,6 +110,15 @@
           <% end %>
         </table>
       </div>
+      <% if @person.address.present? %>
+        <div class="tab-pane" id="address">
+          <% if @person.address.city.present? %>
+            <%= image_tag @person.address.map %>
+            <br><br>
+            <pre><%= @person.address.mappable_address %></pre>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

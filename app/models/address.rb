@@ -1,12 +1,14 @@
 class Address < ActiveRecord::Base
 	geocoded_by :geo_address
 
+  after_validation :geocode
+
 	def geo_address
     "#{street_line_1 if street_line_1} #{street_line_2 if street_line_2} #{city if city}, #{state if state}"
   end
 
   def map
-    "https://maps.google.com/maps/api/staticmap?&zoom=10&scale=4&size=1170x300&sensor=false&zoom=12&markers=#{latitude}%2C#{longitude}"
+    "https://maps.google.com/maps/api/staticmap?&zoom=14&scale=4&size=1170x300&sensor=false&zoom=12&markers=#{latitude}%2C#{longitude}"
   end
 
   def mappable_address

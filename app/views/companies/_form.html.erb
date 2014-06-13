@@ -4,8 +4,9 @@
 
   <div class="row">
     <div class="col-md-6">
+      <legend>General Info</legend>
       <%= f.input :name %>
-      <%= f.input :company_type, collection: (Company.company_types), label_method: :last, value_method: :first, :include_blank => false %>
+      <%= f.input :company_type, collection: (Company.company_types), label_method: :last, value_method: :first, :include_blank => false, input_html: { :class => "form-control"} %>
       <%= f.input :bio %>
       <%= f.input :photo %>
 
@@ -22,7 +23,7 @@
             <%= a.input :city, :placeholder => "Atlanta" %>
           </div>
           <div class="col-md-4">
-            <%= a.input :state, collection: (Address.states), :prompt => 'State...' %>
+            <%= a.input :state, collection: (Address.states), :prompt => 'State...', input_html: { :class => "form-control"} %>
           </div>
           <div class="col-md-3">
             <%= a.input :zip, :placeholder => "30303" %>
@@ -38,7 +39,7 @@
           <%= f.association :digital_addresses do |d_address| %>
             <tr>
               <td><%= d_address.input :url, label: false %></td>
-              <td><%= d_address.collection_select(:address_type, DigitalAddress::address_types, :first, :last) %></td>
+              <td><%= d_address.input :address_type, collection: (DigitalAddress.address_types), label_method: :last, value_method: :first, input_html: { :class => "form-control"}, :label => false %></td>
             </tr>
           <% end %>
         </table>
@@ -71,7 +72,7 @@
 
     $("#add_web_button").click(function(){
       i ++;
-      $("#digital_address_table").append('<tr id="digi_'+i+'""><td><div class="input url optional company_digital_addresses_url"><input class="string url optional" id="company_digital_addresses_attributes_'+i+'_url" name="company[digital_addresses_attributes]['+i+'][url]" type="url" value="http://"></div></td><td><select id="company_digital_addresses_attributes_'+i+'_address_type" name="company[digital_addresses_attributes]['+i+'][address_type]">' + options + '</select></td><td><div class="remove_column">x</div></td></tr>');
+      $("#digital_address_table").append('<tr id="digi_'+i+'""><td><div class="input url optional company_digital_addresses_url"><input class="string url optional" id="company_digital_addresses_attributes_'+i+'_url" name="company[digital_addresses_attributes]['+i+'][url]" type="url" value="http://"></div></td><td><select id="company_digital_addresses_attributes_'+i+'_address_type" name="company[digital_addresses_attributes]['+i+'][address_type]" class="form-control">' + options + '</select></td><td><div class="remove_column">x</div></td></tr>');
     });
   });
 

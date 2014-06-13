@@ -1,3 +1,19 @@
 // Place all the styles related to the People controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#person_date_of_birth_1i,
+#person_date_of_birth_2i,
+#person_date_of_birth_3i {
+	display: inline-block;
+	max-width: 30%;
+}
+
+.person_date_of_birth label {
+	display: block;
+}
+
+.person_employments_company_id,
+.person_digital_addresses_url {
+	margin-right: 10px;
+}

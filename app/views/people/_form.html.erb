@@ -4,13 +4,13 @@
   <div class="row">
     <div class="col-md-6">
 
-      <legend>General Information</legend>
+      <legend>General Info</legend>
       <%= f.input :name %>
       <%= f.input :bio %>
       <%= f.input :gender %>
       <%= f.input :photo %>
 
-      <%= f.input :date_of_birth, :include_blank => true, :default => nil, ampm: true, :order => [:month, :day,:year], start_year: Time.now.year - 90 %>
+      <%= f.input :date_of_birth, input_html: { :class => "form-control"}, :include_blank => true, :default => nil, ampm: true, :order => [:month, :day,:year], start_year: Time.now.year - 90 %>
 
       <legend>Physical Address</legend>
       <%= f.association :address do |a| %>
@@ -25,7 +25,7 @@
             <%= a.input :city, :placeholder => "Atlanta" %>
           </div>
           <div class="col-md-4">
-            <%= a.input :state, collection: (Address.states), :prompt => 'State...' %>
+            <%= a.input :state, collection: (Address.states), input_html: { :class => "form-control"}, :prompt => 'State...' %>
           </div>
           <div class="col-md-3">
             <%= a.input :zip, :placeholder => "30303" %>
@@ -44,7 +44,7 @@
           <%= f.association :digital_addresses do |d_address| %>
             <tr>
               <td><%= d_address.input :url, label: false, :placeholder => "you@example.com" %></td>
-              <td><%= d_address.collection_select(:address_type, DigitalAddress::address_types, :first, :last) %></td>
+              <td><%= d_address.input :address_type, collection: (DigitalAddress.address_types), label_method: :last, value_method: :first, input_html: { :class => "form-control"}, :label => false %></td>
               <td></td>
             </tr>
           <% end %>
@@ -65,7 +65,7 @@
           </tr>
           <%= f.association :employments do |e| %>
             <tr>
-              <td><%= e.input :company_id, collection: (Company.all), label_method: :name, value_method: :id, :label => false %></td>
+              <td><%= e.input :company_id, collection: (Company.all), label_method: :name, value_method: :id, :label => false, input_html: { :class => "form-control"} %></td>
               <td><%= e.input :role, :label => false %></td>
             </tr>
           <% end %>
@@ -99,7 +99,7 @@
 
     $("#add_web_button").click(function(){
       i ++;
-      $("#digital_address_table").append('<tr id="digi_'+i+'""><td><div class="input url optional person_digital_addresses_url"><input class="string url optional" id="person_digital_addresses_attributes_'+i+'_url" name="person[digital_addresses_attributes]['+i+'][url]" type="url" value="http://"></div></td><td><select id="person_digital_addresses_attributes_'+i+'_address_type" name="person[digital_addresses_attributes]['+i+'][address_type]">' + options + '</select></td><td><div class="remove_column">x</div></td></tr>');
+      $("#digital_address_table").append('<tr id="digi_'+i+'""><td><div class="input url optional person_digital_addresses_url"><input class="string url optional form-control" id="person_digital_addresses_attributes_'+i+'_url" name="person[digital_addresses_attributes]['+i+'][url]" type="url" value="http://"></div></td><td><select id="person_digital_addresses_attributes_'+i+'_address_type" name="person[digital_addresses_attributes]['+i+'][address_type]">' + options + '</select></td><td><div class="remove_column">x</div></td></tr>');
     });
   });
 
@@ -110,7 +110,7 @@
 
     $("#add_company").click(function(){
       i ++;
-      $("#employment_table").append('<tr><td><div class="input select optional person_employments_company_id"><select class="select optional" id="person_employments_attributes_'+i+'_company_id" name="person[employments_attributes]['+i+'][company_id]">' + options + '</select></div></td><td><div class="input string optional person_employments_role"><input class="string optional" id="person_employments_attributes_'+i+'_role" name="person[employments_attributes]['+i+'][role]" type="text" value=""></div></td></tr>');
+      $("#employment_table").append('<tr><td><div class="input select optional person_employments_company_id"><select class="select optional form-control" id="person_employments_attributes_'+i+'_company_id" name="person[employments_attributes]['+i+'][company_id]">' + options + '</select></div></td><td><div class="input string optional person_employments_role"><input class="string optional" id="person_employments_attributes_'+i+'_role" name="person[employments_attributes]['+i+'][role]" type="text" value=""></div></td><td><div class="remove_column">x</div></td></tr>');
     });
   });
 
