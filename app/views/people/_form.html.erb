@@ -5,6 +5,7 @@
     <div class="col-md-6">
 
       <legend>General Info</legend>
+      <%= f.input :is_employee, :label => "Your Coworker" %>
       <%= f.input :name %>
       <%= f.input :bio %>
       <%= f.input :gender %>
@@ -72,7 +73,7 @@
         </table>
         <div class="text-right">
           <%= link_to "", :onClick => "return false;", :id => "add_company", :class => "btn btn-sm btn-default pull-right" do %>
-            <div class="glyphicon glyphicon-plus"></div> Add Company
+            <div class="glyphicon glyphicon-plus"></div> Add Employment
           <% end %>
         </div>
       </div>

@@ -82,6 +82,7 @@ class PeopleController < ApplicationController
     def person_params
       params.require(:person).permit(:name,
                                      :bio,
+                                     :is_employee,
                                      :date_of_birth,
                                      :gender,
                                      :photo,
