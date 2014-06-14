@@ -80,4 +80,9 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Setup Keys for S3
+  config.aws_access_key_id     = ENV["AWS_ACCESS_KEY"]
+  config.aws_secret_access_key = ENV["AWS_SECRET_KEY"]
+  config.bucket_name           = ENV["AWS_BUCKET_NAME"]
 end
