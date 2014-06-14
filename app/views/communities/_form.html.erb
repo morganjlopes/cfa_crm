@@ -1,0 +1,101 @@
+<%= simple_form_for(@community, :html => {:multipart => true}) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="row">
+    <div class="col-md-6">
+
+      <legend>General Information</legend>
+      <%= f.input :name, :label => "Store Name" %>
+      <% unless @community.id %>
+        <%= f.input :subdomain %>
+      <% end %>
+      
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.input :photo, :label => "Upload Photo from File" %>
+          <%= f.hidden_field :photo_cache %>
+        </div>
+        <div class="col-md-6">
+          <%= f.input :remote_photo_url, :label => "or from URL (http://...)" %>
+        </div>
+      </div>
+      
+      <%= f.association :users, :label => "Team", label_method: :email, input_method: :id %>
+
+      <legend>Digital Addresses</legend>
+      <div class="">
+        <table id="digital_address_table" class="full_width">
+          <%= f.association :digital_addresses do |d_address| %>
+            <tr>
+              <td><%= d_address.input :url, label: false %></td>
+              <td><%= d_address.input :address_type, collection: (DigitalAddress.address_types), label_method: :last, value_method: :first, input_html: { :class => "form-control"}, :label => false %></td>
+            </tr>
+          <% end %>
+        </table>
+        <div class="text-right">
+          <%= link_to "", :onClick => "return false;", :id => "add_web_button", :class => "btn btn-sm btn-default pull-right" do %>
+            <div class="glyphicon glyphicon-plus"></div> Add Web Address
+          <% end %>
+        </div>
+      </div>
+    
+    </div>
+    <div class="col-md-6">
+
+      <legend>Physical Address</legend>
+      <%= f.association :address do |a| %>
+        <div class="row">
+          <div class="col-md-12">
+            <%= a.input :street_line_1 %>
+          </div>
+          <div class="col-md-12">
+            <%= a.input :street_line_2 %>
+          </div>
+          <div class="col-md-5">
+            <%= a.input :city, :placeholder => "Atlanta" %>
+          </div>
+          <div class="col-md-4">
+            <%= a.input :state, collection: (Address.states), :prompt => 'State...', input_html: { :class => "form-control"} %>
+          </div>
+          <div class="col-md-3">
+            <%= a.input :zip, :placeholder => "30303" %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="form-actions">
+        <%= f.button :submit, :class => "btn btn-primary pull-right" %>
+      </div>
+  
+    </div>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  var subdomain = document.getElementById("community_subdomain");
+
+  $("#community_name").keyup(function() {
+    var user_first_name = document.getElementById("community_subdomain");
+    subdomain.value = this.value.toLowerCase().replace(/\s/g, '');
+  });
+</script>
+
+<script>
+  // Add Digital Address Script
+  $(document).ready(function(){
+    var i = <%= @community.digital_addresses.count %>;
+    var options = '<%= raw options_from_collection_for_select(DigitalAddress.address_types, :first, :last).squish.gsub('> <', '><') %>';
+
+    $("#add_web_button").click(function(){
+      i ++;
+      $("#digital_address_table").append('<tr id="digi_'+i+'""><td><div class="input url optional community_digital_addresses_url"><input class="string url optional" id="community_digital_addresses_attributes_'+i+'_url" name="community[digital_addresses_attributes]['+i+'][url]" type="url"></div></td><td><select id="community_digital_addresses_attributes_'+i+'_address_type" name="community[digital_addresses_attributes]['+i+'][address_type]" class="form-control">' + options + '</select></td><td><div class="remove_column">x</div></td></tr>');
+    });
+  });
+
+  // Remove Row Script
+  $(document).ready(function(){
+    $('table').on('click', '.remove_column', function(e){
+       $(this).closest('tr').remove()
+    })
+   });
+</script>

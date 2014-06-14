@@ -34,34 +34,41 @@
 </div>
 
 <div class="row">
-  <% @companies.order("name asc").each do |company| %>
-    <div class="col-xs-6 col-sm-4 col-md-3">
-      <%= link_to company_path(company) do %>
-        <div class="asset_preview">
-          <% if company.photo.present? %>
-            <%= image_tag company.photo_url(:medium), :class => "asset_img" %>
-          <% else %>
-            <%= image_tag "default_company.png", :class => "asset_img" %>
-          <% end %>
+  <% if @companies.count > 0 %>
+    <% @companies.order("name asc").each do |company| %>
+      <div class="col-xs-6 col-sm-4 col-md-3">
+        <%= link_to company_path(company) do %>
+          <div class="asset_preview">
+            <% if company.photo.present? %>
+              <%= image_tag company.photo_url(:medium), :class => "asset_img" %>
+            <% else %>
+              <%= image_tag "default_company.png", :class => "asset_img" %>
+            <% end %>
 
-          <div>
-            <h2><%= company.name %></h2>
+            <div>
+              <h2><%= company.name %></h2>
 
-            <div class="asset_preview_social text-center">
-              <% company.digital_addresses.order("address_type asc").each do |digi| %>
-                <%= link_to digi.link_to, :target => "_blank" do %>
-                  <div class="<%= digi.icon %>"></div>
+              <div class="asset_preview_social text-center">
+                <% company.digital_addresses.order("address_type asc").each do |digi| %>
+                  <%= link_to digi.link_to, :target => "_blank" do %>
+                    <div class="<%= digi.icon %>"></div>
+                  <% end %>
                 <% end %>
-              <% end %>
-            </div>
+              </div>
 
-            <div class="btn-group btn-group-justified">
-              <%= link_to "Show", company, :class => "btn btn-primary" %>
-              <%= link_to "Edit", edit_company_path(company), :class => "btn btn-primary" %>
+              <div class="btn-group btn-group-justified">
+                <%= link_to "Show", company, :class => "btn btn-primary" %>
+                <%= link_to "Edit", edit_company_path(company), :class => "btn btn-primary" %>
+              </div>
             </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="text-center">
+      <p>There are currently no companies in the <%= @community.name %> Community.</p>
+      <p><%= link_to "Add a Company", new_company_path %></p>
     </div>
   <% end %>
 </div>

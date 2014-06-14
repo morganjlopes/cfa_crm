@@ -21,7 +21,7 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :people, collection: (Person.select {|p| p.email.present?}), :label => "To" %>
+    <%= f.association :people, collection: (@community.people.select {|p| p.email.present?}), :label => "To" %>
     <%= f.input :subject %>
     <%= f.input :body %>
   </div>

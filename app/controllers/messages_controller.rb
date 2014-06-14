@@ -1,10 +1,11 @@
 class MessagesController < ApplicationController
+  before_action :load_community_from_subdomain
   before_action :set_message, only: [:show, :edit, :update, :destroy]
 
   # GET /messages
   # GET /messages.json
   def index
-    @messages = Message.order("created_at desc").all
+    @messages = @community.messages.order("created_at desc").all
     @tab_name = "messages"
   end
 
@@ -16,17 +17,21 @@ class MessagesController < ApplicationController
 
   # GET /messages/new
   def new
-    @message = current_user.messages.new
-    if params[:message_to]
-      @message.person_ids = params[:message_to]
-    end
+    if @community.people.count > 0
+      @message = current_user.messages.new
+      if params[:message_to]
+        @message.person_ids = params[:message_to]
+      end
 
-    if params[:bulk_recipients].present?
-      @people = Person.select {|p| p.companies.where(:company_type => params[:bulk_recipients]).present?}
-      @message.people = @people
-    elsif params[:bulk_employees].present?
-      @people = Person.where(:is_employee => true)
-      @message.people = @people
+      if params[:bulk_recipients].present?
+        @people = @community.people.select {|p| p.companies.where(:company_type => params[:bulk_recipients]).present?}
+        @message.people = @people
+      elsif params[:bulk_employees].present?
+        @people = @community.people.where(:is_employee => true)
+        @message.people = @people
+      end
+    else
+      redirect_to new_person_path, :notice => "You need atleast one person in order to send a message."
     end
       
 
@@ -42,6 +47,7 @@ class MessagesController < ApplicationController
   # POST /messages.json
   def create
     @message = current_user.messages.new(message_params)
+    @message.community = @community
 
     respond_to do |format|
       if @message.save
@@ -84,7 +90,7 @@ class MessagesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_message
-      @message = Message.find(params[:id])
+      @message = @community.messages.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

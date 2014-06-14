@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140613213927) do
+ActiveRecord::Schema.define(version: 20140614131610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,24 @@ ActiveRecord::Schema.define(version: 20140613213927) do
     t.datetime "updated_at"
   end
 
+  create_table "communities", force: true do |t|
+    t.string   "name"
+    t.string   "subdomain"
+    t.integer  "owner_id"
+    t.boolean  "is_active",  default: true, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "address_id"
+    t.string   "photo"
+  end
+
+  create_table "community_users", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "community_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "companies", force: true do |t|
     t.string   "name"
     t.text     "bio"
@@ -37,6 +55,7 @@ ActiveRecord::Schema.define(version: 20140613213927) do
     t.datetime "updated_at"
     t.integer  "address_id"
     t.integer  "company_type"
+    t.integer  "community_id"
   end
 
   create_table "digital_addresses", force: true do |t|
@@ -83,6 +102,7 @@ ActiveRecord::Schema.define(version: 20140613213927) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "community_id"
   end
 
   create_table "notes", force: true do |t|
@@ -108,6 +128,7 @@ ActiveRecord::Schema.define(version: 20140613213927) do
     t.integer  "address_id"
     t.date     "date_of_birth"
     t.boolean  "is_employee",   default: false, null: false
+    t.integer  "community_id"
   end
 
   create_table "users", force: true do |t|

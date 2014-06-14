@@ -5,7 +5,15 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
   def after_sign_in_path_for(current_user)
-	  people_path
+	  communities_path
+	end
+
+	def load_community_from_subdomain
+		@community = Community.find_by_subdomain!(request.subdomain)
+
+		unless @community.users.where(:id => current_user.id).present?
+			redirect_to root_url(:subdomain => false), :notice => "You are not authorized to enter. If you feel as though this is an error, please contact your supervisor."
+		end
 	end
 
 	protected

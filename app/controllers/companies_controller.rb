@@ -1,14 +1,15 @@
 class CompaniesController < ApplicationController
   before_action :authenticate_user!
+  before_action :load_community_from_subdomain
   before_action :set_company, only: [:show, :edit, :update, :destroy]
 
   # GET /companies
   # GET /companies.json
   def index
     if params[:company_type]
-      @search = Company.where(:company_type => params[:company_type]).search(params[:q])
+      @search = @community.companies.where(:company_type => params[:company_type]).search(params[:q])
     else
-      @search = Company.search(params[:q])
+      @search = @community.companies.search(params[:q])
     end
     @companies = @search.result
 
@@ -27,7 +28,7 @@ class CompaniesController < ApplicationController
 
   # GET /companies/new
   def new
-    @company = Company.new
+    @company = @community.companies.new
     @company.build_address
     @company.digital_addresses.build
     @tab_name = "companies"
@@ -44,7 +45,7 @@ class CompaniesController < ApplicationController
   # POST /companies
   # POST /companies.json
   def create
-    @company = Company.new(company_params)
+    @company = @community.companies.new(company_params)
 
     respond_to do |format|
       if @company.save
@@ -84,7 +85,7 @@ class CompaniesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_company
-      @company = Company.friendly.find(params[:id])
+      @company = @community.companies.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

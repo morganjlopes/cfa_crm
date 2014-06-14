@@ -39,34 +39,41 @@
 </div>
 
 <div class="row">
-  <% @people.order("name asc").each do |person| %>
-    <div class="col-xs-6 col-sm-4 col-md-3">
-      <%= link_to person_path(person) do %>
-        <div class="asset_preview">
-          <% if person.photo.present? %>
-            <%= image_tag person.photo_url(:medium), :class => "asset_img" %>
-          <% else %>
-            <%= image_tag "default_person.png", :class => "asset_img" %>
-          <% end %>
+  <% if @people.count > 0 %>
+    <% @people.order("name asc").each do |person| %>
+      <div class="col-xs-6 col-sm-4 col-md-3">
+        <%= link_to person_path(person) do %>
+          <div class="asset_preview">
+            <% if person.photo.present? %>
+              <%= image_tag person.photo_url(:medium), :class => "asset_img" %>
+            <% else %>
+              <%= image_tag "default_person.png", :class => "asset_img" %>
+            <% end %>
 
-          <div>
-            <h2><%= person.name %></h2>
+            <div>
+              <h2><%= person.name %></h2>
 
-            <div class="asset_preview_social text-center">
-              <% person.digital_addresses.order("address_type asc").each do |digi| %>
-                <%= link_to digi.link_to, :target => "_blank" do %>
-                  <div class="<%= digi.icon %>"></div>
+              <div class="asset_preview_social text-center">
+                <% person.digital_addresses.order("address_type asc").each do |digi| %>
+                  <%= link_to digi.link_to, :target => "_blank" do %>
+                    <div class="<%= digi.icon %>"></div>
+                  <% end %>
                 <% end %>
-              <% end %>
-            </div>
+              </div>
 
-            <div class="btn-group btn-group-justified">
-              <%= link_to "Show", person, :class => "btn btn-primary" %>
-              <%= link_to "Edit", edit_person_path(person), :class => "btn btn-primary" %>
+              <div class="btn-group btn-group-justified">
+                <%= link_to "Show", person, :class => "btn btn-primary" %>
+                <%= link_to "Edit", edit_person_path(person), :class => "btn btn-primary" %>
+              </div>
             </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="text-center">
+      <p>There are currently no people in the <%= @community.name %> Community.</p>
+      <p><%= link_to "Add a Person", new_person_path %></p>
     </div>
   <% end %>
 </div>

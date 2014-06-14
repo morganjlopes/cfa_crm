@@ -74,7 +74,7 @@
           </tr>
           <%= f.association :employments do |e| %>
             <tr>
-              <td><%= e.input :company_id, collection: (Company.all), label_method: :name, value_method: :id, :label => false, input_html: { :class => "form-control"} %></td>
+              <td><%= e.input :company_id, collection: (@community.companies.all), label_method: :name, value_method: :id, :label => false, input_html: { :class => "form-control"} %></td>
               <td><%= e.input :role, :label => false %></td>
             </tr>
           <% end %>
@@ -115,7 +115,7 @@
   // Add Digital Address Script
   $(document).ready(function(){
     var i = <%= @person.companies.count %>;
-    var options = '<%= raw options_from_collection_for_select(Company.all, :id, :name).squish.gsub('> <', '><') %>';
+    var options = '<%= raw options_from_collection_for_select(@community.companies.all, :id, :name).squish.gsub('> <', '><') %>';
 
     $("#add_company").click(function(){
       i ++;

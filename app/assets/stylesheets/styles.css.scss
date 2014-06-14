@@ -21,8 +21,16 @@ $blue_hover: rgba(82, 186, 213, 0.75);
 	margin-bottom: 20px;
 }
 
+.person_employments_company_id,
+.person_digital_addresses_url,
+.company_digital_addresses_url,
+.community_digital_addresses_url {
+	margin-right: 10px;
+}
+
 [id^=digi_],
 [id*= digi_] {
+	margin-bottom: 5px;
 	a.delete_link {
 		display: none;
 	}

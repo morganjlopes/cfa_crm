@@ -3,6 +3,7 @@ class Person < ActiveRecord::Base
   friendly_id :name, use: [:slugged, :history]
   
   belongs_to :address
+  belongs_to :community
   
 	has_many :digital_addresses, as: :addressable, :dependent => :destroy
 	has_many :employments

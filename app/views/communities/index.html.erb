@@ -1,0 +1,51 @@
+<%= content_for :heading do %>
+  <h1 class="text-center">
+    <small>Uniting People and Companies</small><br>
+    Communities
+  </h1>
+<% end %>
+
+<%= link_to 'New Community', new_community_path, :class => "btn btn-primary pull-right" %><br>
+<hr>
+
+<div class="row">
+  <% if @communities.count > 0 %>
+    <% @communities.order("name asc").each do |community| %>
+      <div class="col-xs-6 col-sm-4 col-md-3">
+        <%= link_to community_home_url(:subdomain => community.subdomain) do %>
+          <div class="asset_preview">
+            <% if community.photo.present? %>
+              <%= image_tag community.photo_url(:medium), :class => "asset_img" %>
+            <% else %>
+              <%= image_tag "default_company.png", :class => "asset_img" %>
+            <% end %>
+
+            <div>
+              <h2><%= community.name %></h2>
+
+              <div class="asset_preview_social text-center">
+                <% community.digital_addresses.order("address_type asc").each do |digi| %>
+                  <%= link_to digi.link_to, :target => "_blank" do %>
+                    <div class="<%= digi.icon %>"></div>
+                  <% end %>
+                <% end %>
+              </div>
+
+              <div class="btn-group btn-group-justified">
+                <%= link_to 'Enter', community_home_url(:subdomain => community.subdomain), :class => "btn btn-primary" %>
+                <% if community.owner == current_user %>
+                  <%= link_to 'Edit', owner_edit_community_url(:subdomain => community.subdomain), :class => "btn btn-primary" %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="text-center">
+      <p>There are currently no companies in the <%= @community.name %> Community.</p>
+      <p><%= link_to "Add a Company", new_company_path %></p>
+    </div>
+  <% end %>
+</div>

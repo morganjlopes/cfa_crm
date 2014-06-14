@@ -1,0 +1,63 @@
+<%= content_for :heading do %>
+  <h1>
+    <small>Community Home</small><br>
+    <%= @community.name %>
+  </h1>
+<% end %>
+
+<div class="row">
+  <div class="col-md-3">
+    <%= image_tag @community.photo_url(:medium), :class => "asset_img" %>
+    <!-- Contact Info -->
+    <div class="social_icons">
+      <% @community.digital_addresses.order("address_type asc").each do |digi| %>
+        <%= link_to digi.link_to, :target => "_blank" do %>
+          <div id="digi_<%= digi.id %>">
+            <div class="<%= digi.icon %>"></div> <%= digi.url.sub(/^https?\:\/\//, '').sub(/^www./,'') %><br>
+          </div>
+        <% end %>
+      <% end %> 
+    </div>
+
+    <% if @community.address.present? %>
+      <hr>
+      <div class="tab-pane" id="address">
+        <% if @community.address.city.present? %>
+          <pre><%= @community.address.mappable_address %></pre>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-md-5">
+
+    <h2>Overview</h2>
+
+    <table class="table">
+      <tr>
+        <th class="text-center">People</th>
+        <th class="text-center">Companies</th>
+      </tr>
+      <tr>
+        <td class="text-center"><%= @community.people.count %></td>
+        <td class="text-center"><%= @community.companies.count %></td>
+      </tr>
+    </table>
+
+  </div>
+  <div class="col-md-4">
+    <h2>Recently Sent Messages</h2>
+    <% @community.messages.last(5).each do |message| %>
+      <p>
+        <%= link_to message.subject, message_path(message) %><br>
+        <small class="text-muted">
+          By: <%= message.user.email %><br>
+          <em><%= distance_of_time_in_words(message.created_at, Time.now) %> ago</em>
+        </small>
+      </p>
+      <hr>
+      <p class="text-center">
+        <%= link_to "View All Messages", messages_path %>
+      </p>
+    <% end %>
+  </div>
+</div>

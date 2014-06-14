@@ -1,16 +1,17 @@
 class PeopleController < ApplicationController
   before_action :authenticate_user!
+  before_action :load_community_from_subdomain
   before_action :set_person, only: [:show, :edit, :update, :destroy]
 
   # GET /people
   # GET /people.json
   def index
     if params[:person_type] == "customers"
-      @search = Person.where(:is_employee => false).search(params[:q])
+      @search = @community.people.where(:is_employee => false).search(params[:q])
     elsif params[:person_type] == "coworkers"
-      @search = Person.where(:is_employee => true).search(params[:q])
+      @search = @community.people.where(:is_employee => true).search(params[:q])
     else
-      @search = Person.search(params[:q])
+      @search = @community.people.search(params[:q])
     end
       @people = @search.result
 
@@ -29,7 +30,7 @@ class PeopleController < ApplicationController
 
   # GET /people/new
   def new
-    @person = Person.new
+    @person = @community.people.new
     @person.build_address
     @person.digital_addresses.build
     @person.companies.build
@@ -53,7 +54,7 @@ class PeopleController < ApplicationController
   # POST /people
   # POST /people.json
   def create
-    @person = Person.new(person_params)
+    @person = @community.people.new(person_params)
 
     respond_to do |format|
       if @person.save
@@ -83,7 +84,7 @@ class PeopleController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_person
-      @person = Person.friendly.find(params[:id])
+      @person = @community.people.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
