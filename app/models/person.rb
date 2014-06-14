@@ -1,6 +1,6 @@
 class Person < ActiveRecord::Base
 	extend FriendlyId
-  friendly_id :name, use: [:slugged, :history]
+  friendly_id :name, use: [:slugged, :history, :scoped], :scope => :community
   
   belongs_to :address
   belongs_to :community
@@ -17,7 +17,8 @@ class Person < ActiveRecord::Base
 	accepts_nested_attributes_for :digital_addresses
 	accepts_nested_attributes_for :employments
 
-	validates_presence_of :name
+	validates_presence_of :name,
+												:community_id
 
 	mount_uploader :photo, ProfilePhotoUploader
 

@@ -1,6 +1,6 @@
 class Company < ActiveRecord::Base
 	extend FriendlyId
-  friendly_id :name, use: [:slugged, :history]
+  friendly_id :name, use: [:slugged, :history, :scoped], :scope => :community
   
   belongs_to :address
   belongs_to :community
