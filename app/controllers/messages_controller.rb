@@ -20,6 +20,16 @@ class MessagesController < ApplicationController
     if params[:message_to]
       @message.person_ids = params[:message_to]
     end
+
+    if params[:bulk_recipients].present?
+      @people = Person.select {|p| p.companies.where(:company_type => params[:bulk_recipients]).present?}
+      @message.people = @people
+    elsif params[:bulk_employees].present?
+      @people = Person.where(:is_employee => true)
+      @message.people = @people
+    end
+      
+
     @tab_name = "messages"
   end
 
