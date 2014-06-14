@@ -94,6 +94,7 @@ class PeopleController < ApplicationController
                                      :date_of_birth,
                                      :gender,
                                      :photo,
+                                     :remote_photo_url,
                                      :slug,
                                      companies_attributes: [:id, :name],
                                      digital_addresses_attributes: [:id, :name, :address_type, :url],

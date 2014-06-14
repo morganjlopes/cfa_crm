@@ -37,4 +37,9 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Setup Keys for S3
+  config.aws_access_key_id     = ENV["AWS_ACCESS_KEY"]
+  config.aws_secret_access_key = ENV["AWS_SECRET_KEY"]
+  config.bucket_name           = ENV["AWS_BUCKET_NAME"]
 end

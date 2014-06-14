@@ -11,6 +11,9 @@ Rails.application.routes.draw do
     resources :notes
   end
 
+  resources :digital_addresses,
+            :only => [:destroy]
+
   root 'pages#home'
 
   # The priority is based upon order of creation: first created -> highest priority.

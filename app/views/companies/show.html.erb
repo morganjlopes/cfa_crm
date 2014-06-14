@@ -17,18 +17,10 @@
     <!-- Contact Info -->
     <div class="social_icons">
       <% @company.digital_addresses.order("address_type asc").each do |digi| %>
-        <% if digi.address_type > 2 %>
-          <%= link_to digi.url, :target => "_blank" do %>
-            <div class="<%= digi.icon %>"></div>
-          <% end %>
-        <% elsif digi.address_type > 1 %>
-          <%= link_to "mailto:#{digi.url}", :target => "_blank" do %>
-            <div class="<%= digi.icon %>"></div> <%= digi.url %>
-          <% end %><br>
-        <% else %>
-          <%= link_to "tel:+#{digi.url}", :target => "_blank" do %>
-            <div class="<%= digi.icon %>"></div> <%= digi.url %>
-          <% end %><br>
+        <%= link_to digi.link_to, :target => "_blank" do %>
+          <div id="digi_<%= digi.id %>">
+            <div class="<%= digi.icon %>"></div> <%= digi.url.sub(/^https?\:\/\//, '').sub(/^www./,'') %><%= link_to 'x', digital_address_path(digi), method: :delete, data: { confirm: 'Are you sure?' }, :class => "delete_link pull-right" %><br>
+          </div>
         <% end %>
       <% end %> 
     </div>

@@ -50,6 +50,11 @@ gem 'rails_12factor'
 # Autocomplete
 gem 'chosen-rails'
 
+# Handling Images
+gem "rmagick"
+gem "carrierwave", '~> 0.7.1'
+gem "fog"		  			  				# Handle S3 storage
+
 group :development do
 	# Use sqlite3 as the database for Active Record
 	gem "letter_opener"

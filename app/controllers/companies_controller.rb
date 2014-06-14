@@ -94,6 +94,7 @@ class CompaniesController < ApplicationController
                                       :slug,
                                       :company_type,
                                       :photo,
+                                      :remote_photo_url,
                                       digital_addresses_attributes: [:id, :name, :address_type, :url],
                                       address_attributes: [:id, :street_line_1, :street_line_2, :city, :state, :zip])
     end

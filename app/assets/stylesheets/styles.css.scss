@@ -21,6 +21,18 @@ $blue_hover: rgba(82, 186, 213, 0.75);
 	margin-bottom: 20px;
 }
 
+[id^=digi_],
+[id*= digi_] {
+	a.delete_link {
+		display: none;
+	}
+	&:hover {
+		a.delete_link {
+			display: block;
+		}
+	}
+}
+
 .media {
   border: 2px solid #E2E2E2;
   padding: 15px;
@@ -112,6 +124,11 @@ textarea {
   line-height: 25px;
   color: #555;
   width: 100%;
+}
+
+input[type="file"] {
+	line-height: 0px;
+	padding: 10px;
 }
 
 .form-control {

@@ -18,6 +18,8 @@ class Person < ActiveRecord::Base
 
 	validates_presence_of :name
 
+	mount_uploader :photo, ProfilePhotoUploader
+
 	GENDER_MALE			 = 1
 	GENDER_FEMALE 	 = 2
 
