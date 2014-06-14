@@ -44,7 +44,7 @@
       <%= link_to person_path(person) do %>
         <div class="asset_preview">
           <% if person.photo.present? %>
-            <%= image_tag person.photo, :class => "asset_img" %>
+            <%= image_tag person.photo_url(:medium), :class => "asset_img" %>
           <% else %>
             <%= image_tag "default_person.png", :class => "asset_img" %>
           <% end %>

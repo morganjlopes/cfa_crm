@@ -39,7 +39,7 @@
       <%= link_to company_path(company) do %>
         <div class="asset_preview">
           <% if company.photo.present? %>
-            <%= image_tag company.photo, :class => "asset_img" %>
+            <%= image_tag company.photo_url(:medium), :class => "asset_img" %>
           <% else %>
             <%= image_tag "default_company.png", :class => "asset_img" %>
           <% end %>

@@ -18,6 +18,8 @@ class Company < ActiveRecord::Base
   COMPANY_TYPE_CHURCH        = 4
   COMPANY_TYPE_PERSONAL      = 5
 
+  mount_uploader :photo, ProfilePhotoUploader
+
   validates_presence_of :name,
                         :company_type
 
