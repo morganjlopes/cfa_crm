@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   devise_for :users
 
   constraints(lambda { |request| request.subdomain.empty? or request.subdomain == 'www' }) do
-    resources :communities
+    resources :communities,
+              :only => [:index, :new, :create]
 
     root 'pages#home'
   end
@@ -11,14 +12,17 @@ Rails.application.routes.draw do
   # *.inspiredcauses.com => Campaign Subdomains
   constraints(lambda { |request| request.subdomain != 'www' }) do
     resources :people do
-      resources :notes
+      resources :notes,
+                :except => [:update, :edit]
     end
 
     resources :companies do
-      resources :notes
+      resources :notes,
+                :except => [:update, :edit]
     end
 
-    resources :messages
+    resources :messages,
+              :except => [:edit, :update, :destroy]
 
     resources :digital_addresses,
               :only => [:destroy]
