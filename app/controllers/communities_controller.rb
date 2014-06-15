@@ -20,7 +20,7 @@ class CommunitiesController < ApplicationController
     @community = Community.new
     @community.owner = current_user
     @community.user_ids = [current_user.id]
-    @community.address.build
+    @community.build_address
     @community.digital_addresses.build
   end
 
