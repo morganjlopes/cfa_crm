@@ -1,11 +1,20 @@
 <div class="media media_note">
 	<%= note.body %>
 	<br>
-	<% if note.attachment.present? %>
-		<%= link_to "#{note.attachment}", :class => "pull-right", :target => "_blank" do %>
-			<div class="glyphicon glyphicon-paperclip"></div>Attachment
-		<% end %><br>
-	<% end %>
+  <ul class="list-inline border_none">
+  	<% if note.reminder_ds.present? %>
+    	<li>
+    		<div class="icon-alarmclock"></div> <%= note.reminder_ds.strftime("%b %e, %Y") %>
+      </li>
+  	<% end %>
+    <% if note.attachment.present? %>
+      <li class="pull-right">
+        <%= link_to "#{note.attachment}", :target => "_blank" do %>
+          <div class="icon-paperclip"></div> Attachment
+        <% end %><br>
+      </li>
+    <% end %>
+  </ul>
 	<ul class="list-inline text-right">
     <li>
       <%= note.user.email %>

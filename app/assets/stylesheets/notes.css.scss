@@ -8,6 +8,9 @@
 		border-top: 1px solid #E2E2E2;
 		margin-top: 10px;
 		padding-top: 10px;
+		&.border_none {
+			border: none;
+		}
 	}
 }
 

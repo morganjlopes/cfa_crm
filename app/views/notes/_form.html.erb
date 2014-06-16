@@ -1,4 +1,4 @@
-<%= simple_form_for([@noteable, @note]) do |f| %>
+<%= simple_form_for([@noteable, @note], :html => {:multipart => true}) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
