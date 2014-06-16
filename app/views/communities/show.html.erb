@@ -27,10 +27,6 @@
         <% end %>
       </div>
     <% end %>
-  </div>
-  <div class="col-md-5">
-
-    <h2>Overview</h2>
 
     <table class="table">
       <tr>
@@ -42,22 +38,46 @@
         <td class="text-center"><%= @community.companies.count %></td>
       </tr>
     </table>
-
   </div>
-  <div class="col-md-4">
-    <h2>Recently Sent Messages</h2>
-    <% @community.messages.last(5).each do |message| %>
-      <p>
-        <%= link_to message.subject, message_path(message) %><br>
-        <small class="text-muted">
-          By: <%= message.user.email %><br>
-          <em><%= distance_of_time_in_words(message.created_at, Time.now) %> ago</em>
-        </small>
-      </p>
-      <hr>
-      <p class="text-center">
-        <%= link_to "View All Messages", messages_path %>
-      </p>
-    <% end %>
+  <div class="col-md-9">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs">
+      <li><div class="tab-text">Recent:</div></li>
+      <li class="active"><a href="#notes" data-toggle="tab"><div class="icon-noteslist"></div> Notes</a></li>
+      <li><a href="#messages" data-toggle="tab"><div class="icon-map-marker"></div> Messages</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div class="tab-pane active" id="notes">
+        <div class="row">
+          <div class="col-sm-6 col-md-7">
+            <%= render @notes.last(5) if @notes %>
+          </div>
+          <div class="col-sm-6 col-md-5">
+            <div class="new_note_wrapper">
+              <h3 class="new_note_heading">New Note</h3>
+              <%= render "notes/form" %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="messages">
+        <% @community.messages.last(5).each do |message| %>
+          <p>
+            <%= link_to message.subject, message_path(message) %><br>
+            <small class="text-muted">
+              By: <%= message.user.email %><br>
+              <em><%= distance_of_time_in_words(message.created_at, Time.now) %> ago</em>
+            </small>
+          </p>
+          <hr>
+          <p class="text-center">
+            <%= link_to "View All Messages", messages_path %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+
   </div>
 </div>

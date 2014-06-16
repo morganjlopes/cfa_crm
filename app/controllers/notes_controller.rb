@@ -70,6 +70,8 @@ class NotesController < ApplicationController
     def load_noteable
       resource, id = request.path.split('/')[1, 2]
       @noteable = resource.singularize.classify.constantize.friendly.find(id)
+    rescue
+      @noteable = Community.find_by_subdomain!(request.subdomain)
     end
 
     # Use callbacks to share common setup or constraints between actions.

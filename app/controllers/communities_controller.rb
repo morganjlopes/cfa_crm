@@ -12,6 +12,10 @@ class CommunitiesController < ApplicationController
   # GET /communities/1
   # GET /communities/1.json
   def show
+    @noteable   = @community
+    @note       = @community.notes.new
+    @notes      = @community.notes.order("created_at desc")
+
     @tab_name = "community_home"
   end
 

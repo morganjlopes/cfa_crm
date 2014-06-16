@@ -28,7 +28,10 @@ Rails.application.routes.draw do
               :only => [:destroy]
 
     resources :communities,
-              :only => [:show, :update]
+              :only => [:show, :update] do
+      resources :notes,
+                :except => [:update, :edit]
+    end
 
     get '/edit', to: 'communities#edit', as: :owner_edit_community
     root :to => "communities#show", as: :community_home
