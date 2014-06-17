@@ -63,16 +63,17 @@
         <div class="row">
           <div class="col-sm-6 col-md-7">
             <%= render @notes.last(5) if @notes %>
-
-            <% if @notes.count > 5 %>
-              <div class="text-center">
-                <%= link_to "View All Notes", person_notes_url(@person), :class => "btn btn-link" %>
-              </div>
-            <% elsif @notes.count == 0 %>
+      
+            <% if @notes.count == 0 %>
               <div class="text-center">
                 <p>There are currently no notes for <%= @person.first_name %>.</p>
               </div>
+            <% else %>
+              <div class="text-center">
+                <%= link_to "View All Notes", person_notes_url(@person), :class => "btn btn-link" %>
+              </div>
             <% end %>
+
           </div>
           <div class="col-sm-6 col-md-5">
             <div class="new_note_wrapper">

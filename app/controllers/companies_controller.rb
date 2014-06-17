@@ -16,6 +16,9 @@ class CompaniesController < ApplicationController
     @companies = @search.result
 
     @tab_name = "companies"
+    @page_title       = ""
+    @page_subtitle    = ""
+    @page_description = ""
 
     add_breadcrumb "Companies", companies_path, :title => "#{@community.name} Companies"
   end
@@ -28,6 +31,9 @@ class CompaniesController < ApplicationController
     @notes      = @company.notes.order("created_at desc")
 
     @tab_name = "companies"
+    @page_title       = ""
+    @page_subtitle    = ""
+    @page_description = ""
 
     add_breadcrumb "Companies", companies_path, :title => "#{@community.name} Companies"
     add_breadcrumb "#{@company.name}", company_path(@company), :title => "#{@company.name} with #{@community.name}"
@@ -38,7 +44,11 @@ class CompaniesController < ApplicationController
     @company = @community.companies.new
     @company.build_address
     @company.digital_addresses.build
-    @tab_name = "companies"
+    
+    @tab_name         = "companies"
+    @page_title       = ""
+    @page_subtitle    = ""
+    @page_description = ""
 
     add_breadcrumb "Companies", companies_path, :title => "#{@community.name} Companies"
     add_breadcrumb "New", new_company_path, :title => "New Company within #{@community.name}"
@@ -49,7 +59,11 @@ class CompaniesController < ApplicationController
     unless @company.address.present?
       @company.build_address
     end
-    @tab_name = "companies"
+    
+    @tab_name         = "companies"
+    @page_title       = ""
+    @page_subtitle    = ""
+    @page_description = ""
 
     add_breadcrumb "Companies", companies_path, :title => "#{@community.name} Companies"
     add_breadcrumb "#{@company.name}", company_path(@company), :title => "#{@company.name} with #{@community.name}"

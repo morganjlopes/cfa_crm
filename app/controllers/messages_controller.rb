@@ -8,7 +8,11 @@ class MessagesController < ApplicationController
   # GET /messages.json
   def index
     @messages = @community.messages.order("created_at desc").all
-    @tab_name = "messages"
+    
+    @tab_name         = "messages"
+    @page_title       = ""
+    @page_subtitle    = ""
+    @page_description = ""
 
     add_breadcrumb "Messages", messages_path, :title => "#{@community.name} Messages"
   end
@@ -16,7 +20,10 @@ class MessagesController < ApplicationController
   # GET /messages/1
   # GET /messages/1.json
   def show
-    @tab_name = "messages"
+    @tab_name         = "messages"
+    @page_title       = ""
+    @page_subtitle    = ""
+    @page_description = ""
 
     add_breadcrumb "Messages", messages_path, :title => "#{@community.name} Messages"
     add_breadcrumb "'#{@message.subject}'", message_path(@message), :title => "#{@message.subject}"
@@ -41,7 +48,10 @@ class MessagesController < ApplicationController
       redirect_to new_person_path, :notice => "You need atleast one person in order to send a message."
     end
       
-    @tab_name = "messages"
+    @tab_name         = "messages"
+    @page_title       = ""
+    @page_subtitle    = ""
+    @page_description = ""
 
     add_breadcrumb "New", new_messages_path, :title => "New #{@community.name} Message"
   end

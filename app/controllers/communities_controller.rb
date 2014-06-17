@@ -7,6 +7,10 @@ class CommunitiesController < ApplicationController
   # GET /communities.json
   def index
     @communities = current_user.communities.all
+
+    @page_title       = ""
+    @page_subtitle    = ""
+    @page_description = ""
   end
 
   # GET /communities/1
@@ -16,7 +20,10 @@ class CommunitiesController < ApplicationController
     @note       = @community.notes.new
     @notes      = @community.notes.order("created_at desc")
 
-    @tab_name = "community_home"
+    @tab_name         = "community_home"
+    @page_title       = ""
+    @page_subtitle    = ""
+    @page_description = ""
   end
 
   # GET /communities/new
@@ -26,6 +33,10 @@ class CommunitiesController < ApplicationController
     @community.user_ids = [current_user.id]
     @community.build_address
     @community.digital_addresses.build
+
+    @page_title       = ""
+    @page_subtitle    = ""
+    @page_description = ""
   end
 
   # GET /communities/1/edit
@@ -33,6 +44,10 @@ class CommunitiesController < ApplicationController
     unless @community.address.present?
       @community.build_address
     end
+
+    @page_title       = ""
+    @page_subtitle    = ""
+    @page_description = ""
   end
 
   # POST /communities

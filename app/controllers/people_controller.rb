@@ -17,7 +17,10 @@ class PeopleController < ApplicationController
     end
       @people = @search.result
 
-    @tab_name = "people"
+    @tab_name         = "people"
+    @page_title       = ""
+    @page_subtitle    = ""
+    @page_description = ""
 
     add_breadcrumb "People", people_path, :title => "#{@community.name} People"
   end
@@ -29,7 +32,10 @@ class PeopleController < ApplicationController
     @note       = @person.notes.new
     @notes      = @person.notes.order("created_at desc")
 
-    @tab_name = "people"
+    @tab_name         = "people"
+    @page_title       = ""
+    @page_subtitle    = ""
+    @page_description = ""
 
     add_breadcrumb "People", people_path, :title => "#{@community.name} People"
     add_breadcrumb "#{@person.name}", person_path(@person), :title => "#{@person.name} within #{@community.name}"
@@ -42,7 +48,11 @@ class PeopleController < ApplicationController
     @person.digital_addresses.build
     @person.companies.build
     @person.employments.build
-    @tab_name = "people"
+    
+    @tab_name         = "people"
+    @page_title       = ""
+    @page_subtitle    = ""
+    @page_description = ""
 
     add_breadcrumb "People", people_path, :title => "#{@community.name} People"
     add_breadcrumb "New", new_person_path, :title => "New People"
@@ -58,7 +68,10 @@ class PeopleController < ApplicationController
       @person.build_address
     end
 
-    @tab_name = "people"
+    @tab_name         = "people"
+    @page_title       = ""
+    @page_subtitle    = ""
+    @page_description = ""
 
     add_breadcrumb "People", people_path, :title => "#{@community.name} People"
     add_breadcrumb "#{@person.name}", person_path(@person), :title => "#{@person.name} within #{@community.name}"

@@ -9,7 +9,11 @@ class NotesController < ApplicationController
     @notes = @noteable.notes.all
 
     resource, id = request.path.split('/')[1, 2]
-    @tab_name = "#{resource.singularize.pluralize}"
+    
+    @tab_name         = "#{resource.singularize.pluralize}"
+    @page_title       = ""
+    @page_subtitle    = ""
+    @page_description = ""
 
     add_breadcrumb "Home", community_home_path, :title => "#{@community.name} Home"
     add_breadcrumb "People", people_path, :title => "#{@community.name} People"
