@@ -3,6 +3,8 @@ class PeopleController < ApplicationController
   before_action :load_community_from_subdomain
   before_action :set_person, only: [:show, :edit, :update, :destroy]
 
+  add_breadcrumb "Home", :community_home_path
+
   # GET /people
   # GET /people.json
   def index
@@ -16,6 +18,8 @@ class PeopleController < ApplicationController
       @people = @search.result
 
     @tab_name = "people"
+
+    add_breadcrumb "People", people_path, :title => "#{@community.name} People"
   end
 
   # GET /people/1
@@ -26,6 +30,9 @@ class PeopleController < ApplicationController
     @notes      = @person.notes.order("created_at desc")
 
     @tab_name = "people"
+
+    add_breadcrumb "People", people_path, :title => "#{@community.name} People"
+    add_breadcrumb "#{@person.name}", person_path(@person), :title => "#{@person.name} within #{@community.name}"
   end
 
   # GET /people/new
@@ -36,6 +43,9 @@ class PeopleController < ApplicationController
     @person.companies.build
     @person.employments.build
     @tab_name = "people"
+
+    add_breadcrumb "People", people_path, :title => "#{@community.name} People"
+    add_breadcrumb "New", new_person_path, :title => "New People"
   end
 
   # GET /people/1/edit
@@ -49,6 +59,10 @@ class PeopleController < ApplicationController
     end
 
     @tab_name = "people"
+
+    add_breadcrumb "People", people_path, :title => "#{@community.name} People"
+    add_breadcrumb "#{@person.name}", person_path(@person), :title => "#{@person.name} within #{@community.name}"
+    add_breadcrumb "Edit", edit_person_path(@person), :title => "Edit #{@person.name} within #{@community.name}"
   end
 
   # POST /people

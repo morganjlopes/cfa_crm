@@ -3,6 +3,8 @@ class CompaniesController < ApplicationController
   before_action :load_community_from_subdomain
   before_action :set_company, only: [:show, :edit, :update, :destroy]
 
+  add_breadcrumb "Home", :community_home_path
+
   # GET /companies
   # GET /companies.json
   def index
@@ -14,6 +16,8 @@ class CompaniesController < ApplicationController
     @companies = @search.result
 
     @tab_name = "companies"
+
+    add_breadcrumb "Companies", companies_path, :title => "#{@community.name} Companies"
   end
 
   # GET /companies/1
@@ -24,6 +28,9 @@ class CompaniesController < ApplicationController
     @notes      = @company.notes.order("created_at desc")
 
     @tab_name = "companies"
+
+    add_breadcrumb "Companies", companies_path, :title => "#{@community.name} Companies"
+    add_breadcrumb "#{@company.name}", company_path(@company), :title => "#{@company.name} with #{@community.name}"
   end
 
   # GET /companies/new
@@ -32,6 +39,9 @@ class CompaniesController < ApplicationController
     @company.build_address
     @company.digital_addresses.build
     @tab_name = "companies"
+
+    add_breadcrumb "Companies", companies_path, :title => "#{@community.name} Companies"
+    add_breadcrumb "New", new_company_path, :title => "New Company within #{@community.name}"
   end
 
   # GET /companies/1/edit
@@ -40,6 +50,10 @@ class CompaniesController < ApplicationController
       @company.build_address
     end
     @tab_name = "companies"
+
+    add_breadcrumb "Companies", companies_path, :title => "#{@community.name} Companies"
+    add_breadcrumb "#{@company.name}", company_path(@company), :title => "#{@company.name} with #{@community.name}"
+    add_breadcrumb "Edit", edit_company_path(@company), :title => "Edit #{@company.name} with #{@community.name}"
   end
 
   # POST /companies

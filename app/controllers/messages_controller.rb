@@ -2,17 +2,24 @@ class MessagesController < ApplicationController
   before_action :load_community_from_subdomain
   before_action :set_message, only: [:show, :edit, :update, :destroy]
 
+  add_breadcrumb "Home", :community_home_path
+
   # GET /messages
   # GET /messages.json
   def index
     @messages = @community.messages.order("created_at desc").all
     @tab_name = "messages"
+
+    add_breadcrumb "Messages", messages_path, :title => "#{@community.name} Messages"
   end
 
   # GET /messages/1
   # GET /messages/1.json
   def show
     @tab_name = "messages"
+
+    add_breadcrumb "Messages", messages_path, :title => "#{@community.name} Messages"
+    add_breadcrumb "'#{@message.subject}'", message_path(@message), :title => "#{@message.subject}"
   end
 
   # GET /messages/new
@@ -34,13 +41,9 @@ class MessagesController < ApplicationController
       redirect_to new_person_path, :notice => "You need atleast one person in order to send a message."
     end
       
-
     @tab_name = "messages"
-  end
 
-  # GET /messages/1/edit
-  def edit
-    @tab_name = "messages"
+    add_breadcrumb "New", new_messages_path, :title => "New #{@community.name} Message"
   end
 
   # POST /messages
@@ -60,30 +63,6 @@ class MessagesController < ApplicationController
         format.html { render :new }
         format.json { render json: @message.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # PATCH/PUT /messages/1
-  # PATCH/PUT /messages/1.json
-  def update
-    respond_to do |format|
-      if @message.update(message_params)
-        format.html { redirect_to @message, notice: 'Message was successfully updated.' }
-        format.json { render :show, status: :ok, location: @message }
-      else
-        format.html { render :edit }
-        format.json { render json: @message.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /messages/1
-  # DELETE /messages/1.json
-  def destroy
-    @message.destroy
-    respond_to do |format|
-      format.html { redirect_to messages_url, notice: 'Message was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

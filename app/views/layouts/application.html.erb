@@ -79,6 +79,12 @@
 </div>
 
 <div class="container main_container">
+  <!-- Breadcrumb Titles are handles in the controller -->
+  <% if render_breadcrumbs.present? %>
+    <ol class="breadcrumb">
+      <%= render_breadcrumbs :tag => :li, :separator => "" %>
+    </ol>
+  <% end %>
 	<% if notice %><div class="alert alert-success"><%= notice %></div><% end %>
 	<% if alert %><div class="alert alert-danger"><%= alert %></div><% end %>
 	<%= yield %>

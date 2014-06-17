@@ -44,6 +44,7 @@ GEM
     addressable (2.3.6)
     arel (5.0.1.20140414130214)
     bcrypt (3.1.7)
+    breadcrumbs_on_rails (2.3.0)
     builder (3.2.2)
     carrierwave (0.7.1)
       activemodel (>= 3.2.0)
@@ -124,6 +125,8 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    meta-tags (2.0.0)
+      actionpack (>= 3.0.0)
     mime-types (1.25.1)
     mini_portile (0.6.0)
     minitest (5.3.4)
@@ -213,6 +216,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-postgresql-adapter
+  breadcrumbs_on_rails
   carrierwave (~> 0.7.1)
   chosen-rails
   coffee-rails (~> 4.0.0)
@@ -225,6 +229,7 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   letter_opener
+  meta-tags
   pg
   rails (= 4.1.1)
   rails_12factor

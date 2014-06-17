@@ -57,3 +57,11 @@ $blue_hover: rgba(82, 186, 213, 0.75);
 		color: $blue_hover;
 	}
 }
+
+.breadcrumb {
+	padding: 8px 15px;
+	margin-bottom: 20px;
+	list-style: none;
+	background-color: #F5F5F5;
+	border-radius: 0px;
+}

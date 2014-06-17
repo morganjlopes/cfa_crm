@@ -55,6 +55,10 @@ gem "rmagick"
 gem "carrierwave", '~> 0.7.1'
 gem "fog"		  			  				# Handle S3 storage
 
+# Breadcrumbs and Meta
+gem "breadcrumbs_on_rails"
+gem 'meta-tags'
+
 group :development do
 	# Use sqlite3 as the database for Active Record
 	gem "letter_opener"

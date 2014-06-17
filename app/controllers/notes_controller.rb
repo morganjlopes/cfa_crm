@@ -1,6 +1,7 @@
 class NotesController < ApplicationController
   before_action :set_note, only: [:show, :edit, :update, :destroy]
   before_filter :load_noteable, :only => [:create, :destroy, :index]
+  before_action :load_community_from_subdomain, :only => [:index]
 
   # GET /notes
   # GET /notes.json
@@ -9,6 +10,11 @@ class NotesController < ApplicationController
 
     resource, id = request.path.split('/')[1, 2]
     @tab_name = "#{resource.singularize.pluralize}"
+
+    add_breadcrumb "Home", community_home_path, :title => "#{@community.name} Home"
+    add_breadcrumb "People", people_path, :title => "#{@community.name} People"
+    add_breadcrumb "#{@noteable.name}", polymorphic_url(@noteable), :title => "#{@noteable.name} within #{@community.name}"
+    add_breadcrumb "Notes", request.original_url, :title => "#{@noteable.name} Notes from #{@community.name}"
   end
 
   # GET /notes/1
