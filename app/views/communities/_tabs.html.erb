@@ -1,0 +1,30 @@
+<!-- Nav tabs -->
+<ul class="nav nav-tabs">
+  <li><div class="tab-text">Recent:</div></li>
+  <li class="active"><a href="#notes" data-toggle="tab"><div class="icon-noteslist"></div> Notes</a></li>
+  <li><a href="#messages" data-toggle="tab"><div class="icon-map-marker"></div> Messages</a></li>
+  <li class="pull-right"><%= link_to "Edit #{@community.name}", owner_edit_community_path %></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="notes">
+    <div class="row">
+      <div class="col-sm-6 col-md-7">
+        <%= render @notes.last(5) if @notes %>
+      </div>
+      <div class="col-sm-6 col-md-5">
+        <div class="new_note_wrapper">
+          <h3 class="new_note_heading">New Note</h3>
+          <%= render "notes/form" %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-pane" id="messages">
+    <%= render @community.messages %>
+    <p class="text-center">
+      <%= link_to "View All Messages", messages_path %>
+    </p>
+  </div>
+</div>

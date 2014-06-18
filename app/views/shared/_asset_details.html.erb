@@ -1,0 +1,75 @@
+<!-- Common Asset Attributes -->
+<!-- Main Photo -->
+<% if asset.photo.present? %>
+  <%= image_tag asset.photo_url(:medium), :class => "asset_img" %>
+<% else %>
+  <%= image_tag "default_company.png", :class => "asset_img" %>
+<% end %>
+
+<!-- Contact Info -->
+<div class="social_icons">
+  <%= render asset.digital_addresses.order("address_type asc") %>
+</div>
+
+<!-- Unique Asset Attributes -->
+<% if asset == @person %>
+  
+  <% if asset.bio.present? %>
+    <br>
+    <p class="well">
+      <%= asset.bio %>
+    </p>
+  <% end %>
+
+  <% if @person.date_of_birth.present? %>
+    <div class="text-muted">
+      <div class="icon-gift"></div> <%= @person.date_of_birth.strftime("%b %e, %Y") %>
+    </div>
+  <% end %>
+
+  <% if @person.companies.present? %>
+    <h3>Companies</h3>
+    <% @person.companies.each do |company| %>
+      <%= link_to company.name, company_path(company) %>
+    <% end %>
+  <% end %>
+
+<% elsif asset == @person %>
+  
+  <% if asset.bio.present? %>
+    <br>
+    <p class="well">
+      <%= asset.bio %>
+    </p>
+  <% end %>
+
+  <% if @company.people.count > 0 %>
+    <h3>Employees</h3>
+    <% @company.people.each do |person| %>
+      <%= link_to person.name, person_path(person) %>
+    <% end %>
+  <% end %>
+
+<% elsif asset == @community %>
+  
+  <% if @community.address.present? %>
+    <hr>
+    <div class="tab-pane" id="address">
+      <% if @community.address.city.present? %>
+        <pre><%= @community.address.mappable_address %></pre>
+      <% end %>
+    </div>
+  <% end %>
+
+  <table class="table">
+    <tr>
+      <th class="text-center">People</th>
+      <th class="text-center">Companies</th>
+    </tr>
+    <tr>
+      <td class="text-center"><%= @community.people.count %></td>
+      <td class="text-center"><%= @community.companies.count %></td>
+    </tr>
+  </table>
+<% end %>
+

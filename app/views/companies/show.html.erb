@@ -7,78 +7,10 @@
 
 <div class="row">
   <div class="col-sm-6 col-md-3">
-    <!-- Main Photo -->
-    <% if @company.photo.present? %>
-      <%= image_tag @company.photo_url(:medium), :class => "asset_img" %>
-    <% else %>
-      <%= image_tag "default_company.png", :class => "asset_img" %>
-    <% end %>
-
-    <!-- Contact Info -->
-    <div class="social_icons">
-      <%= render @company.digital_addresses.order("address_type asc") %>
-    </div>
-
-    <% if @company.bio.present? %>
-      <br>
-      <p class="well">
-        <%= @company.bio %>
-      </p>
-    <% end %>
-
-    <% if @company.people.count > 0 %>
-      <h3>Employees</h3>
-      <% @company.people.each do |person| %>
-        <%= link_to person.name, person_path(person) %>
-      <% end %>
-    <% end %>
-
+    <%= render partial: "shared/asset_details", locals: {:asset => @company} %>
   </div>
 
   <div class="col-sm-6 col-md-9">
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs">
-      <li class="active"><a href="#notes" data-toggle="tab"><div class="icon-noteslist"></div> Notes</a></li>
-      <% if @company.address.city.present? %>
-        <li><a href="#address" data-toggle="tab"><div class="icon-map-marker"></div> Address</a></li>
-      <% end %>
-      <li class="pull-right"><%= link_to "Edit Company's Info", edit_company_path(@company) %></li>
-    </ul>
-
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <div class="tab-pane active" id="notes">
-        <div class="row">
-          <div class="col-sm-6 col-md-7">
-            <%= render @notes.last(5) if @notes %>
-
-            <% if @notes.count > 5 %>
-              <div class="text-center">
-                <%= link_to "View All Notes", company_notes_url(@company), :class => "btn btn-link" %>
-              </div>
-            <% elsif @notes.count == 0 %>
-              <div class="text-center">
-                <p>There are currently no notes for <%= @company.name %>.</p>
-              </div>
-            <% end %>
-          </div>
-          <div class="col-sm-6 col-md-5">
-            <div class="new_note_wrapper">
-              <h3 class="new_note_heading">New Note</h3>
-              <%= render "notes/form" %>
-            </div>
-          </div>
-        </div>
-      </div>
-      <% if @company.address.present? %>
-        <div class="tab-pane" id="address">
-          <% if @company.address.city.present? %>
-            <%= image_tag @company.address.map %>
-            <br><br>
-            <pre><%= @company.address.mappable_address %></pre>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
+    <%= render "companies/tabs" %>
   </div>
 </div>

@@ -1,0 +1,27 @@
+<div class="col-xs-6 col-sm-4 col-md-3">
+  <%= link_to asset do %>
+    <div class="asset_preview">
+      <% if asset.photo.present? %>
+        <%= image_tag asset.photo_url(:medium), :class => "asset_img" %>
+      <% else %>
+        <%= image_tag "default_person.png", :class => "asset_img" %>
+      <% end %>
+
+      <div>
+        <h2><%= asset.name %></h2>
+
+        <div class="asset_preview_social text-center">
+          <% asset.digital_addresses.order("address_type asc").each do |digi| %>
+            <%= link_to digi.link_to, :target => "_blank" do %>
+              <div class="<%= digi.icon %>"></div>
+            <% end %>
+          <% end %>
+        </div>
+
+        <div class="btn-group btn-group-justified">
+          <%= link_to "Show", asset, :class => "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

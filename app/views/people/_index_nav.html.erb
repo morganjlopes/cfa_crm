@@ -1,0 +1,14 @@
+<div>
+  <ul class="nav nav-pills">
+    <li class="pull-right <%= "active" unless params[:person_type] %>">
+      <%= link_to "All",  url_for(:person_type => nil) %>
+    </li>
+    <li class="pull-right <%= "active" if params[:person_type] == "customers" %>">
+      <%= link_to "Customers",  url_for(:person_type => "customers") %>
+    </li>
+    <li class="pull-right <%= "active" if params[:person_type] == "coworkers" %>">
+      <%= link_to "Coworkers",  url_for(:person_type => "coworkers") %>
+    </li>
+  </ul>
+  <br>
+</div>

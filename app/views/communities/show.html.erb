@@ -7,63 +7,11 @@
 
 <div class="row">
   <div class="col-md-3">
-    <%= image_tag @community.photo_url(:medium), :class => "asset_img" %>
-    <!-- Contact Info -->
-    <div class="social_icons">
-      <%= render @community.digital_addresses.order("address_type asc") %>
-    </div>
 
-    <% if @community.address.present? %>
-      <hr>
-      <div class="tab-pane" id="address">
-        <% if @community.address.city.present? %>
-          <pre><%= @community.address.mappable_address %></pre>
-        <% end %>
-      </div>
-    <% end %>
+    <%= render partial: "shared/asset_details", locals: {:asset => @community} %>
 
-    <table class="table">
-      <tr>
-        <th class="text-center">People</th>
-        <th class="text-center">Companies</th>
-      </tr>
-      <tr>
-        <td class="text-center"><%= @community.people.count %></td>
-        <td class="text-center"><%= @community.companies.count %></td>
-      </tr>
-    </table>
   </div>
   <div class="col-md-9">
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs">
-      <li><div class="tab-text">Recent:</div></li>
-      <li class="active"><a href="#notes" data-toggle="tab"><div class="icon-noteslist"></div> Notes</a></li>
-      <li><a href="#messages" data-toggle="tab"><div class="icon-map-marker"></div> Messages</a></li>
-      <li class="pull-right"><%= link_to "Edit #{@community.name}", owner_edit_community_path %></li>
-    </ul>
-
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <div class="tab-pane active" id="notes">
-        <div class="row">
-          <div class="col-sm-6 col-md-7">
-            <%= render @notes.last(5) if @notes %>
-          </div>
-          <div class="col-sm-6 col-md-5">
-            <div class="new_note_wrapper">
-              <h3 class="new_note_heading">New Note</h3>
-              <%= render "notes/form" %>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="tab-pane" id="messages">
-        <%= render @community.messages %>
-        <p class="text-center">
-          <%= link_to "View All Messages", messages_path %>
-        </p>
-      </div>
-    </div>
-
+    <%= render "communities/tabs" %>
   </div>
 </div>

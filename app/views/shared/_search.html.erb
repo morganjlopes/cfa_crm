@@ -1,0 +1,8 @@
+<%= search_form_for @search, :class => "search_form" do |f| %>
+  <div class="input-group">
+    <%= f.text_field :name_cont, :class => "form-control" %>
+    <span class="input-group-btn">
+      <%= f.submit "Search", :class => "btn btn-primary" %>
+    </span>
+  </div><!-- /input-group -->
+<% end %>

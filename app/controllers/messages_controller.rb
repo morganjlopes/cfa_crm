@@ -53,7 +53,8 @@ class MessagesController < ApplicationController
     @page_subtitle    = ""
     @page_description = ""
 
-    add_breadcrumb "New", new_messages_path, :title => "New #{@community.name} Message"
+    add_breadcrumb "Messages", messages_path, :title => "#{@community.name} Messages"
+    add_breadcrumb "New", new_message_path, :title => "New #{@community.name} Message"
   end
 
   # POST /messages

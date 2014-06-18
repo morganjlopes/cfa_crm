@@ -7,14 +7,7 @@
 
 <div class="row">
   <div class="col-sm-4">
-    <%= search_form_for @search, :class => "search_form" do |f| %>
-      <div class="input-group">
-        <%= f.text_field :name_cont, :class => "form-control" %>
-        <span class="input-group-btn">
-          <%= f.submit "Search", :class => "btn btn-primary" %>
-        </span>
-      </div><!-- /input-group -->
-    <% end %>
+    <%= render "shared/search" %>
   </div>
   <div class="col-sm-4 col-sm-offset-4">
     <%= link_to 'New Company', new_company_path, :class => "btn btn-primary pull-right" %>
@@ -23,48 +16,11 @@
 
 <hr>
 
-<div>
-  <ul class="nav nav-pills">
-    <li class="pull-right <%= "active" unless params[:company_type] %>"><%= link_to "All",  url_for(:company_type => nil) %></li>
-    <% Company.company_types.each do |type| %>
-      <li class="pull-right <%= "active" if params[:company_type] == "#{type.first}" %>"><%= link_to type.last, url_for(:company_type => type.first) %></li>
-    <% end %>
-  </ul>
-  <br>
-</div>
+<%= render "companies/index_nav" %>
 
 <div class="row">
   <% if @companies.count > 0 %>
-    <% @companies.order("name asc").each do |company| %>
-      <div class="col-xs-6 col-sm-4 col-md-3">
-        <%= link_to company_path(company) do %>
-          <div class="asset_preview">
-            <% if company.photo.present? %>
-              <%= image_tag company.photo_url(:medium), :class => "asset_img" %>
-            <% else %>
-              <%= image_tag "default_company.png", :class => "asset_img" %>
-            <% end %>
-
-            <div>
-              <h2><%= company.name %></h2>
-
-              <div class="asset_preview_social text-center">
-                <% company.digital_addresses.order("address_type asc").each do |digi| %>
-                  <%= link_to digi.link_to, :target => "_blank" do %>
-                    <div class="<%= digi.icon %>"></div>
-                  <% end %>
-                <% end %>
-              </div>
-
-              <div class="btn-group btn-group-justified">
-                <%= link_to "Show", company, :class => "btn btn-primary" %>
-                <%= link_to "Edit", edit_company_path(company), :class => "btn btn-primary" %>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
+    <%= render @companies.order("name asc") %>
   <% else %>
     <div class="text-center">
       <p>There are currently no companies in the <%= @community.name %> Community.</p>

@@ -1,0 +1,55 @@
+<!-- Nav tabs -->
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#notes" data-toggle="tab"><div class="icon-noteslist"></div> Notes</a></li>
+  <li><a href="#messages" data-toggle="tab"><div class="icon-inbox"></div> Messages</a></li>
+  <% if @person.address.city.present? %>
+    <li><a href="#address" data-toggle="tab"><div class="icon-map-marker"></div> Address</a></li>
+  <% end %>
+  <li class="pull-right"><%= link_to "Edit #{@person.first_name}'s Info", edit_person_path(@person) %></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="notes">
+    <div class="row">
+      <div class="col-sm-6 col-md-7">
+        <%= render @notes.last(5) if @notes %>
+  
+        <% if @notes.count == 0 %>
+          <div class="text-center">
+            <p>There are currently no notes for <%= @person.first_name %>.</p>
+          </div>
+        <% else %>
+          <div class="text-center">
+            <%= link_to "View All Notes", person_notes_url(@person), :class => "btn btn-link" %>
+          </div>
+        <% end %>
+
+      </div>
+      <div class="col-sm-6 col-md-5">
+        <div class="new_note_wrapper">
+          <h3 class="new_note_heading">New Note</h3>
+          <%= render "notes/form" %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="tab-pane" id="messages">
+    <div class="text-right">
+      <%= link_to "New Message", new_message_path(:message_to => @person.id), :class => "btn btn-primary" %><br><br>
+    </div>
+    
+    <%= render @messages %>
+
+  </div>
+  <% if @person.address.present? %>
+    <div class="tab-pane" id="address">
+      <% if @person.address.city.present? %>
+        <%= image_tag @person.address.map %>
+        <br><br>
+        <pre><%= @person.address.mappable_address %></pre>
+      <% end %>
+    </div>
+  <% end %>
+</div>

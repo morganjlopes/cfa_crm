@@ -7,94 +7,10 @@
 
 <div class="row">
   <div class="col-sm-6 col-md-3">
-    <!-- Main Photo -->
-    <% if @person.photo.present? %>
-      <%= image_tag @person.photo_url(:medium), :class => "asset_img" %>
-    <% else %>
-      <%= image_tag "default_person.png", :class => "asset_img" %>
-    <% end %>
-
-    <!-- Contact Info -->
-    <div class="social_icons">
-      <%= render @person.digital_addresses.order("address_type asc") %>
-    </div>
-
-    <% if @person.date_of_birth.present? %>
-      <div class="text-muted">
-        <div class="icon-gift"></div> <%= @person.date_of_birth.strftime("%b %e, %Y") %>
-      </div>
-    <% end %>
-
-    <% if @person.bio.present? %>
-      <hr>
-      <p class="well">
-        <%= @person.bio %>
-      </p>
-    <% end %>
-
-    <% if @person.companies.present? %>
-      <h3>Companies</h3>
-      <% @person.companies.each do |company| %>
-        <%= link_to company.name, company_path(company) %>
-      <% end %>
-    <% end %>
+    <%= render partial: "shared/asset_details", locals: {:asset => @person} %>
   </div>
 
   <div class="col-sm-6 col-md-9">
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs">
-      <li class="active"><a href="#notes" data-toggle="tab"><div class="icon-noteslist"></div> Notes</a></li>
-      <li><a href="#messages" data-toggle="tab"><div class="icon-inbox"></div> Messages</a></li>
-      <% if @person.address.city.present? %>
-        <li><a href="#address" data-toggle="tab"><div class="icon-map-marker"></div> Address</a></li>
-      <% end %>
-      <li class="pull-right"><%= link_to "Edit #{@person.first_name}'s Info", edit_person_path(@person) %></li>
-    </ul>
-
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <div class="tab-pane active" id="notes">
-        <div class="row">
-          <div class="col-sm-6 col-md-7">
-            <%= render @notes.last(5) if @notes %>
-      
-            <% if @notes.count == 0 %>
-              <div class="text-center">
-                <p>There are currently no notes for <%= @person.first_name %>.</p>
-              </div>
-            <% else %>
-              <div class="text-center">
-                <%= link_to "View All Notes", person_notes_url(@person), :class => "btn btn-link" %>
-              </div>
-            <% end %>
-
-          </div>
-          <div class="col-sm-6 col-md-5">
-            <div class="new_note_wrapper">
-              <h3 class="new_note_heading">New Note</h3>
-              <%= render "notes/form" %>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <div class="tab-pane" id="messages">
-        <div class="text-right">
-          <%= link_to "New Message", new_message_path(:message_to => @person.id), :class => "btn btn-primary" %><br><br>
-        </div>
-        
-        <%= render @messages %>
-
-      </div>
-      <% if @person.address.present? %>
-        <div class="tab-pane" id="address">
-          <% if @person.address.city.present? %>
-            <%= image_tag @person.address.map %>
-            <br><br>
-            <pre><%= @person.address.mappable_address %></pre>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
+    <%= render "people/tabs" %>
   </div>
 </div>
