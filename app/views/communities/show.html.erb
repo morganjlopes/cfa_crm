@@ -45,6 +45,7 @@
       <li><div class="tab-text">Recent:</div></li>
       <li class="active"><a href="#notes" data-toggle="tab"><div class="icon-noteslist"></div> Notes</a></li>
       <li><a href="#messages" data-toggle="tab"><div class="icon-map-marker"></div> Messages</a></li>
+      <li class="pull-right"><%= link_to "Edit #{@community.name}", owner_edit_community_path %></li>
     </ul>
 
     <!-- Tab panes -->
@@ -63,19 +64,10 @@
         </div>
       </div>
       <div class="tab-pane" id="messages">
-        <% @community.messages.last(5).each do |message| %>
-          <p>
-            <%= link_to message.subject, message_path(message) %><br>
-            <small class="text-muted">
-              By: <%= message.user.email %><br>
-              <em><%= distance_of_time_in_words(message.created_at, Time.now) %> ago</em>
-            </small>
-          </p>
-          <hr>
-          <p class="text-center">
-            <%= link_to "View All Messages", messages_path %>
-          </p>
-        <% end %>
+        <%= render @community.messages %>
+        <p class="text-center">
+          <%= link_to "View All Messages", messages_path %>
+        </p>
       </div>
     </div>
 

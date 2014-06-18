@@ -31,6 +31,7 @@ class PeopleController < ApplicationController
     @noteable   = @person
     @note       = @person.notes.new
     @notes      = @person.notes.order("created_at desc")
+    @messages   = @person.messages.order("created_at desc")
 
     @tab_name         = "people"
     @page_title       = ""
@@ -64,6 +65,7 @@ class PeopleController < ApplicationController
     unless @person.employments.present?
       @person.employments.build
     end
+    
     unless @person.address.present?
       @person.build_address
     end

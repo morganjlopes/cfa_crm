@@ -49,6 +49,7 @@
           <tr>
             <th>Reference</th>
             <th>Type</th>
+            <th class="remove_button_column"></th>
           </tr>
           <%= f.association :digital_addresses do |d_address| %>
             <tr>
@@ -71,6 +72,7 @@
           <tr>
             <th>Company</th>
             <th>Role</th>
+            <th class="remove_button_column"></th>
           </tr>
           <%= f.association :employments do |e| %>
             <tr>
@@ -100,33 +102,39 @@
   </div>
 <% end %>
 
-<script type="text/javascript">
-  // Add Digital Address Script
-  $(document).ready(function(){
-    var i = <%= @person.digital_addresses.count %>;
-    var options = '<%= raw options_from_collection_for_select(DigitalAddress.address_types, :first, :last).squish.gsub('> <', '><') %>';
+<%= content_for :page_script do %>
+  <script type="text/javascript">
+    // Add Digital Address Script
+    $(document).ready(function(){
+      var i = <%= @person.digital_addresses.count %>;
+      var options = '<%= raw options_from_collection_for_select(DigitalAddress.address_types, :first, :last).squish.gsub('> <', '><') %>';
 
-    $("#add_web_button").click(function(){
-      i ++;
-      $("#digital_address_table").append('<tr id="digi_'+i+'""><td><div class="input url optional person_digital_addresses_url"><input class="string url optional" id="person_digital_addresses_attributes_'+i+'_url" name="person[digital_addresses_attributes]['+i+'][url]" type="url" value="http://"></div></td><td><select id="person_digital_addresses_attributes_'+i+'_address_type" name="person[digital_addresses_attributes]['+i+'][address_type]" class="form-control">' + options + '</select></td><td><div class="remove_column">x</div></td></tr>');
+      $("#add_web_button").click(function(){
+        i ++;
+        $("#digital_address_table").append('<tr id="digi_'+i+'""><td><div class="input url optional person_digital_addresses_url"><input class="string url optional" id="person_digital_addresses_attributes_'+i+'_url" name="person[digital_addresses_attributes]['+i+'][url]" type="url" value="http://"></div></td><td><select id="person_digital_addresses_attributes_'+i+'_address_type" name="person[digital_addresses_attributes]['+i+'][address_type]" class="form-control">' + options + '</select></td><td><div class="remove_column">x</div></td></tr>');
+      });
     });
-  });
+  </script>
 
-  // Add Digital Address Script
-  $(document).ready(function(){
-    var i = <%= @person.companies.count %>;
-    var options = '<%= raw options_from_collection_for_select(@community.companies.all, :id, :name).squish.gsub('> <', '><') %>';
+  <script type="text/javascript">
+    // Add Digital Address Script
+    $(document).ready(function(){
+      var i = <%= @person.companies.count %>;
+      var options = '<%= raw options_from_collection_for_select(@community.companies.all, :id, :name).squish.gsub('> <', '><') %>';
 
-    $("#add_company").click(function(){
-      i ++;
-      $("#employment_table").append('<tr><td><div class="input select optional person_employments_company_id"><select class="select optional form-control" id="person_employments_attributes_'+i+'_company_id" name="person[employments_attributes]['+i+'][company_id]">' + options + '</select></div></td><td><div class="input string optional person_employments_role"><input class="string optional" id="person_employments_attributes_'+i+'_role" name="person[employments_attributes]['+i+'][role]" type="text" value=""></div></td><td><div class="remove_column">x</div></td></tr>');
+      $("#add_company").click(function(){
+        i ++;
+        $("#employment_table").append('<tr><td><div class="input select optional person_employments_company_id"><select class="select optional form-control" id="person_employments_attributes_'+i+'_company_id" name="person[employments_attributes]['+i+'][company_id]">' + options + '</select></div></td><td><div class="input string optional person_employments_role"><input class="string optional" id="person_employments_attributes_'+i+'_role" name="person[employments_attributes]['+i+'][role]" type="text" value=""></div></td><td><div class="remove_column">x</div></td></tr>');
+      });
     });
-  });
+  </script>
+  <script type="text/javascript">
 
-  // Remove Row Script
-  $(document).ready(function(){
-    $('table').on('click', '.remove_column', function(e){
-       $(this).closest('tr').remove()
-    })
-   });
-</script>
+    // Remove Row Script
+    $(document).ready(function(){
+      $('table').on('click', '.remove_column', function(e){
+         $(this).closest('tr').remove()
+      })
+     });
+  </script>
+<% end %>

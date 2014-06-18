@@ -33,6 +33,7 @@ class CommunitiesController < ApplicationController
     @community.user_ids = [current_user.id]
     @community.build_address
     @community.digital_addresses.build
+    @community.digital_addresses.build
 
     @page_title       = ""
     @page_subtitle    = ""
@@ -43,6 +44,10 @@ class CommunitiesController < ApplicationController
   def edit
     unless @community.address.present?
       @community.build_address
+    end
+
+    unless @community.digital_addresses.present?
+      @community.digital_addresses.build
     end
 
     @page_title       = ""

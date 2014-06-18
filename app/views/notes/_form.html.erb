@@ -24,15 +24,17 @@
   </div>
 <% end %>
 
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('#want_reminder').click(function(){
-			var item = $(this).attr('name');
-	      $('.reminder_wrapper').toggle();
-		});
-		$('#want_attachment').click(function(){
-			var item = $(this).attr('name');
-	      $('.attachment_wrapper').toggle();
-		});
-	});
-</script>
+<%= content_for :page_script do %>
+  <script type="text/javascript">
+  	$(document).ready(function(){
+  		$('#want_reminder').click(function(){
+  			var item = $(this).attr('name');
+  	      $('.reminder_wrapper').toggle();
+  		});
+  		$('#want_attachment').click(function(){
+  			var item = $(this).attr('name');
+  	      $('.attachment_wrapper').toggle();
+  		});
+  	});
+  </script>
+<% end %>

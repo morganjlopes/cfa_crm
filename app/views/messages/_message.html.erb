@@ -1,0 +1,8 @@
+<p>
+  <%= link_to message.subject, message_path(message) %><br>
+  <small class="text-muted">
+    By: <%= message.user.email %><br>
+    <em><%= distance_of_time_in_words(message.created_at, Time.now) %> ago</em>
+  </small>
+</p>
+<hr>

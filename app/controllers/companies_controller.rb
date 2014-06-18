@@ -15,7 +15,7 @@ class CompaniesController < ApplicationController
     end
     @companies = @search.result
 
-    @tab_name = "companies"
+    @tab_name         = "companies"
     @page_title       = ""
     @page_subtitle    = ""
     @page_description = ""
@@ -30,7 +30,7 @@ class CompaniesController < ApplicationController
     @note       = @company.notes.new
     @notes      = @company.notes.order("created_at desc")
 
-    @tab_name = "companies"
+    @tab_name         = "companies"
     @page_title       = ""
     @page_subtitle    = ""
     @page_description = ""
@@ -58,6 +58,10 @@ class CompaniesController < ApplicationController
   def edit
     unless @company.address.present?
       @company.build_address
+    end
+
+    unless @company.digital_addresses.present?
+      @company.digital_addresses.build
     end
     
     @tab_name         = "companies"

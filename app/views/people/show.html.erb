@@ -88,26 +88,9 @@
         <div class="text-right">
           <%= link_to "New Message", new_message_path(:message_to => @person.id), :class => "btn btn-primary" %><br><br>
         </div>
-        <table class="table">
-          <tr>
-            <th>Subject</th>
-            <th>User</th>
-            <th>Sent</th>
-          </tr>
-          <% if @person.messages.count > 0 %>
-            <% @person.messages.each do |message| %>
-              <tr>
-                <td><%= link_to truncate(message.subject, :length => 40), message_path(message) %></td>
-                <td><%= message.user.email %></td>
-                <td><%= message.created_at.strftime("%D") %></td>
-              </tr>
-            <% end %>
-          <% else %>
-            <tr>
-              <td colspan="3" class="text-center">No messages have been sent to <%= @person.first_name %></td>
-            </tr>
-          <% end %>
-        </table>
+        
+        <%= render @messages %>
+
       </div>
       <% if @person.address.present? %>
         <div class="tab-pane" id="address">
