@@ -9,7 +9,12 @@
 
 <div class="heading">
 	<div class="container">
-		<%= yield(:heading) %>
+		<h1>
+      <% if @page_subtitle.present? %>
+        <small><%= @page_subtitle %></small><br>
+      <% end %>
+      <%= @page_title %>
+    </h1>
 	</div>
 </div>
 

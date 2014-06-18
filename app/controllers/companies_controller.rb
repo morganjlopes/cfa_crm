@@ -16,8 +16,8 @@ class CompaniesController < ApplicationController
     @companies = @search.result
 
     @tab_name         = "companies"
-    @page_title       = ""
-    @page_subtitle    = ""
+    @page_title       = "Companies"
+    @page_subtitle    = "Loyal Businesses"
     @page_description = ""
 
     add_breadcrumb "Companies", companies_path, :title => "#{@community.name} Companies"
@@ -31,8 +31,8 @@ class CompaniesController < ApplicationController
     @notes      = @company.notes.order("created_at desc")
 
     @tab_name         = "companies"
-    @page_title       = ""
-    @page_subtitle    = ""
+    @page_title       = "#{@company.name}"
+    @page_subtitle    = "Connected on #{@company.created_at.strftime("%b %e, %Y")}"
     @page_description = ""
 
     add_breadcrumb "Companies", companies_path, :title => "#{@community.name} Companies"
@@ -46,7 +46,7 @@ class CompaniesController < ApplicationController
     @company.digital_addresses.build
     
     @tab_name         = "companies"
-    @page_title       = ""
+    @page_title       = "New Company"
     @page_subtitle    = ""
     @page_description = ""
 
@@ -65,8 +65,8 @@ class CompaniesController < ApplicationController
     end
     
     @tab_name         = "companies"
-    @page_title       = ""
-    @page_subtitle    = ""
+    @page_title       = "Edit #{@company.name}"
+    @page_subtitle    = "Update Company Information"
     @page_description = ""
 
     add_breadcrumb "Companies", companies_path, :title => "#{@community.name} Companies"

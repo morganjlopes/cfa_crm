@@ -1,8 +1,5 @@
-<%= content_for :heading do %>
-  <h1 class="text-center">
-    Change Your Password
-  </h1>
-<% end %>
+<% @page_title       = "Change Your Password"
+   @page_subtitle    = "" %>
 
 <div class="general_form_wrapper user_form">
   <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>

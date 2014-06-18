@@ -11,8 +11,8 @@ class NotesController < ApplicationController
     resource, id = request.path.split('/')[1, 2]
     
     @tab_name         = "#{resource.singularize.pluralize}"
-    @page_title       = ""
-    @page_subtitle    = ""
+    @page_title       = "Notes"
+    @page_subtitle    = "#{@noteable.name}"
     @page_description = ""
 
     add_breadcrumb "Home", community_home_path, :title => "#{@community.name} Home"

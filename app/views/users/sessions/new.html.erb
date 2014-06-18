@@ -1,9 +1,5 @@
-<%= content_for :heading do %>
-  <h1 class="text-center">
-    <small>Welcome Back</small><br>
-    Sign In
-  </h1>
-<% end %>
+<% @page_title       = "Sign In"
+   @page_subtitle    = "Welcome Back" %>
 
 <div class="general_form_wrapper user_form">
 	<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>

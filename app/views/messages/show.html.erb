@@ -1,9 +1,3 @@
-<%= content_for :heading do %>
-  <h1>
-    <small>Message</small><br>
-    '<%= @message.subject %>'
-  </h1>
-<% end %>
 
 <p>To: <%= @message.people.map {|p| "#{p.name} <#{p.email}>"}.join(", ") %></p>
 <p>From: <%= @message.user.email %></p>

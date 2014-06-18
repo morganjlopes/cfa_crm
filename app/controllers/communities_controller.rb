@@ -8,8 +8,8 @@ class CommunitiesController < ApplicationController
   def index
     @communities = current_user.communities.all
 
-    @page_title       = ""
-    @page_subtitle    = ""
+    @page_title       = "Communities"
+    @page_subtitle    = "Uniting People and Companies"
     @page_description = ""
   end
 
@@ -21,8 +21,8 @@ class CommunitiesController < ApplicationController
     @notes      = @community.notes.order("created_at desc")
 
     @tab_name         = "community_home"
-    @page_title       = ""
-    @page_subtitle    = ""
+    @page_title       = "#{@community.name}"
+    @page_subtitle    = "Community Home"
     @page_description = ""
   end
 
@@ -35,8 +35,8 @@ class CommunitiesController < ApplicationController
     @community.digital_addresses.build
     @community.digital_addresses.build
 
-    @page_title       = ""
-    @page_subtitle    = ""
+    @page_title       = "New Community"
+    @page_subtitle    = "Your Store Information"
     @page_description = ""
   end
 
@@ -50,8 +50,8 @@ class CommunitiesController < ApplicationController
       @community.digital_addresses.build
     end
 
-    @page_title       = ""
-    @page_subtitle    = ""
+    @page_title       = "Edit #{@community.name}"
+    @page_subtitle    = "Update Community Information"
     @page_description = ""
   end
 

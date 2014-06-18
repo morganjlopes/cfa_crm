@@ -10,8 +10,8 @@ class MessagesController < ApplicationController
     @messages = @community.messages.order("created_at desc").all
     
     @tab_name         = "messages"
-    @page_title       = ""
-    @page_subtitle    = ""
+    @page_title       = "Messages"
+    @page_subtitle    = "Providing Constant Contact"
     @page_description = ""
 
     add_breadcrumb "Messages", messages_path, :title => "#{@community.name} Messages"
@@ -21,8 +21,8 @@ class MessagesController < ApplicationController
   # GET /messages/1.json
   def show
     @tab_name         = "messages"
-    @page_title       = ""
-    @page_subtitle    = ""
+    @page_title       = "'#{@message.subject}'"
+    @page_subtitle    = "Message from #{@message.user.email}"
     @page_description = ""
 
     add_breadcrumb "Messages", messages_path, :title => "#{@community.name} Messages"
@@ -49,7 +49,7 @@ class MessagesController < ApplicationController
     end
       
     @tab_name         = "messages"
-    @page_title       = ""
+    @page_title       = "New Message"
     @page_subtitle    = ""
     @page_description = ""
 

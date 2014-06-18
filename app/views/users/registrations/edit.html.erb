@@ -1,9 +1,5 @@
-<%= content_for :heading do %>
-  <h1 class="text-center">
-    <small>Update Account Settings</small><br>
-    <%= current_user.email %>
-  </h1>
-<% end %>
+<% @page_title       = "#{current_user.email}"
+   @page_subtitle    = "Update Account Settings" %>
 
 <div class="general_form_wrapper user_form">
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>

@@ -1,9 +1,5 @@
-<%= content_for :heading do %>
-  <h1 class="text-center">
-  	<small>Share with Coworkers</small><br>
-    Send Invitation
-  </h1>
-<% end %>
+<% @page_title       = "Send Invitation"
+   @page_subtitle    = "Share with Coworkers" %>
 
 <div class="general_form_wrapper user_form">
 	<%= simple_form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f| %>

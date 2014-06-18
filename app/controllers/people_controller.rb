@@ -18,8 +18,8 @@ class PeopleController < ApplicationController
       @people = @search.result
 
     @tab_name         = "people"
-    @page_title       = ""
-    @page_subtitle    = ""
+    @page_title       = "People"
+    @page_subtitle    = "Emotional Connections"
     @page_description = ""
 
     add_breadcrumb "People", people_path, :title => "#{@community.name} People"
@@ -34,8 +34,8 @@ class PeopleController < ApplicationController
     @messages   = @person.messages.order("created_at desc")
 
     @tab_name         = "people"
-    @page_title       = ""
-    @page_subtitle    = ""
+    @page_title       = "#{@person.name}"
+    @page_subtitle    = "Connected on #{@person.created_at.strftime("%b %e, %Y")}"
     @page_description = ""
 
     add_breadcrumb "People", people_path, :title => "#{@community.name} People"
@@ -51,7 +51,7 @@ class PeopleController < ApplicationController
     @person.employments.build
     
     @tab_name         = "people"
-    @page_title       = ""
+    @page_title       = "New Person"
     @page_subtitle    = ""
     @page_description = ""
 
@@ -71,8 +71,8 @@ class PeopleController < ApplicationController
     end
 
     @tab_name         = "people"
-    @page_title       = ""
-    @page_subtitle    = ""
+    @page_title       = "Edit #{@person.name}"
+    @page_subtitle    = "Update Person Information"
     @page_description = ""
 
     add_breadcrumb "People", people_path, :title => "#{@community.name} People"
