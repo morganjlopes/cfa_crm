@@ -62,7 +62,7 @@ class CommunitiesController < ApplicationController
 
     respond_to do |format|
       if @community.save
-        format.html { redirect_to community_home_path(:subdomain => @community.subdomain), notice: 'Community was successfully created.' }
+        format.html { redirect_to community_home_url(:subdomain => @community.subdomain), notice: 'Community was successfully created.' }
         format.json { render :show, status: :created, location: @community }
       else
         format.html { render :new }
@@ -76,7 +76,7 @@ class CommunitiesController < ApplicationController
   def update
     respond_to do |format|
       if @community.update(community_params)
-        format.html { redirect_to community_home_path(:subdomain => @community.subdomain), notice: 'Community was successfully updated.' }
+        format.html { redirect_to community_home_url(:subdomain => @community.subdomain), notice: 'Community was successfully updated.' }
         format.json { render :show, status: :ok, location: @community }
       else
         format.html { render :edit }

@@ -10,13 +10,7 @@
     <%= image_tag @community.photo_url(:medium), :class => "asset_img" %>
     <!-- Contact Info -->
     <div class="social_icons">
-      <% @community.digital_addresses.order("address_type asc").each do |digi| %>
-        <%= link_to digi.link_to, :target => "_blank" do %>
-          <div id="digi_<%= digi.id %>">
-            <div class="<%= digi.icon %>"></div> <%= digi.url.sub(/^https?\:\/\//, '').sub(/^www./,'') %><br>
-          </div>
-        <% end %>
-      <% end %> 
+      <%= render @community.digital_addresses.order("address_type asc") %>
     </div>
 
     <% if @community.address.present? %>

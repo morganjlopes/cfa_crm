@@ -1,0 +1,5 @@
+<%= link_to digital_address.link_to, :target => "_blank" do %>
+  <div id="digi_<%= digital_address.id %>">
+    <div class="<%= digital_address.icon %>"></div> <%= truncate(digital_address.url.sub(/^https?\:\/\//, '').sub(/^www./,''), :length => 30) %><%= link_to 'x', digital_address_path(digital_address), method: :delete, data: { confirm: 'Are you sure?' }, :class => "delete_link pull-right" %><br>
+  </div>
+<% end %>

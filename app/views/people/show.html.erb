@@ -16,13 +16,7 @@
 
     <!-- Contact Info -->
     <div class="social_icons">
-      <% @person.digital_addresses.order("address_type asc").each do |digi| %>
-        <%= link_to digi.link_to, :target => "_blank" do %>
-          <div id="digi_<%= digi.id %>">
-            <div class="<%= digi.icon %>"></div> <%= digi.url.sub(/^https?\:\/\//, '').sub(/^www./,'') %><%= link_to 'x', digital_address_path(digi), method: :delete, data: { confirm: 'Are you sure?' }, :class => "delete_link pull-right" %><br>
-          </div>
-        <% end %>
-      <% end %> 
+      <%= render @person.digital_addresses.order("address_type asc") %>
     </div>
 
     <% if @person.date_of_birth.present? %>
