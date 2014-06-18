@@ -1,6 +1,11 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  config.action_mailer.default_url_options = { host: 'community_cfa.com' }
+
+  config.session_store :cookie_store, key: '_cfa_community_session', domain: :all
+
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
