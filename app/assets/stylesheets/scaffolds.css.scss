@@ -58,6 +58,10 @@ legend {
   color: green;
 }
 
+.container {
+  max-width: 1000px;
+}
+
 .field_with_errors {
   font-family: 'Source-Sans-Pro', verdana, arial, helvetica, sans-serif;
   padding: 2px;
@@ -96,4 +100,13 @@ legend {
     font-size: 12px;
     list-style: square;
   }
+}
+
+.footer {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin-top: 100px;
+  color: #777;
+  text-align: center;
+  border-top: 1px solid #E5E5E5;
 }
