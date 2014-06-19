@@ -1,5 +1,12 @@
 
-<%= link_to 'New Message', new_message_path, :class => "btn btn-primary pull-right" %><br>
+<% if @person %>
+  <%= link_to "New Message", new_message_path(:message_to => @person.id), :class => "btn btn-primary pull-right" %>
+<% else %>
+  <%= link_to 'New Message', new_message_path, :class => "btn btn-primary pull-right" %>
+<% end %>
+
+<br>
+<hr>
 
 <% if @messages.count > 0 %>
   <table class="table">
@@ -15,7 +22,11 @@
     <tbody>
       <% @messages.each do |message| %>
         <tr>
-          <td><%= link_to message.subject, message_path(message) %></td>
+          <% if @person %>
+            <td><%= link_to message.subject, person_message_path(@person, message) %></td>
+          <% else %>
+            <td><%= link_to message.subject, message_path(message) %></td>
+          <% end %>
           <td>
             <% if message.people.count < 3 %>
               <%= message.people.map {|p| link_to p.name, person_path(p)}.join(", ").html_safe %>
@@ -32,7 +43,7 @@
 <% else %>
   <div class="text-center">
     <hr>
-    <p>There are currently no messages in the <%= @community.name %> Community.</p>
+    <p>There are currently no messages in the <%= @community.name %> Community<%= " for #{@person.name}" if @person %>.</p>
     <p><%= link_to "Send a Message", new_message_path %></p>
   </div>
 <% end %>

@@ -21,7 +21,7 @@
           </div>
         <% else %>
           <div class="text-center">
-            <%= link_to "View All Notes", person_notes_url(@person), :class => "btn btn-link" %>
+            <%= link_to "View All #{@person.first_name}'s Notes", person_notes_url(@person), :class => "btn btn-link" %>
           </div>
         <% end %>
 
@@ -41,6 +41,16 @@
     </div>
     
     <%= render @messages %>
+
+    <% if @messages.count == 0 %>
+      <div class="text-center">
+        <p>There are currently no messages for <%= @person.first_name %>.</p>
+      </div>
+    <% else %>
+      <div class="text-center">
+        <%= link_to "View All #{@person.first_name}'s Messages", person_messages_url(@person), :class => "btn btn-link" %>
+      </div>
+    <% end %>
 
   </div>
   <% if @person.address.present? %>

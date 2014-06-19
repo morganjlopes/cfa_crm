@@ -2,8 +2,18 @@
   <div class="col-sm-4">
     <%= render "shared/search" %>
   </div>
-  <div class="col-sm-4 col-sm-offset-4">
-    <%= link_to 'New Company', new_company_path, :class => "btn btn-primary pull-right" %>
+  <div class="col-sm-8">
+    <div class="btn-group pull-right">
+      <%= link_to new_company_path, :class => "btn btn-primary" do %>
+        <div class="icon-plus"></div> New Company
+      <% end %>
+      <%= link_to "", :class => "btn btn-primary" do %>
+        <div class="icon-export"></div> Export
+      <% end %>
+      <%= link_to "", :class => "btn btn-primary" do %>
+        <div class="icon-import"></div> Import
+      <% end %>
+    </div>
   </div>
 </div>
 

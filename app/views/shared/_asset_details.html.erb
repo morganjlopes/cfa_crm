@@ -14,17 +14,17 @@
 <!-- Unique Asset Attributes -->
 <% if asset == @person %>
   
+  <% if @person.date_of_birth.present? %>
+    <div class="text-muted">
+      <div class="icon-gift"></div> <%= @person.date_of_birth.strftime("%b %e, %Y") %>
+    </div>
+  <% end %>
+
   <% if asset.bio.present? %>
     <br>
     <p class="well">
       <%= asset.bio %>
     </p>
-  <% end %>
-
-  <% if @person.date_of_birth.present? %>
-    <div class="text-muted">
-      <div class="icon-gift"></div> <%= @person.date_of_birth.strftime("%b %e, %Y") %>
-    </div>
   <% end %>
 
   <% if @person.companies.present? %>

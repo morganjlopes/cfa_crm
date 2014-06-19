@@ -1,8 +1,20 @@
-<p>
-  <%= link_to message.subject, message_path(message) %><br>
-  <small class="text-muted">
-    By: <%= message.user.email %><br>
-    <em><%= distance_of_time_in_words(message.created_at, Time.now) %> ago</em>
-  </small>
-</p>
-<hr>
+<div class="media">
+	<p>To:
+		<% if message.people.count < 3 %>
+	    <%= message.people.map {|p| link_to p.name, person_path(p)}.join(", ").html_safe %>
+	  <% else %>
+	    <%= message.people.count %> People
+	  <% end %>
+	</p>
+	<p>
+	  <%= message.subject %>
+	</p>
+
+	<hr>
+
+	<ul class="list-inline">
+	  <li class="text-muted">By: <%= message.user.email %><br></li>
+	  <li class="text-muted"><em><%= distance_of_time_in_words(message.created_at, Time.now) %> ago</em></li>
+	  <li><%= link_to "View Message", message_path(message) %></li>
+	</ul>
+</div>

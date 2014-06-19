@@ -14,6 +14,9 @@ Rails.application.routes.draw do
     resources :people do
       resources :notes,
                 :except => [:update, :edit]
+      
+      resources :messages,
+                :only => [:index, :show]
     end
 
     resources :companies do

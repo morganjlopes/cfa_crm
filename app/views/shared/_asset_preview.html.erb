@@ -8,7 +8,7 @@
       <% end %>
 
       <div>
-        <h2><%= asset.name %></h2>
+        <h2><%= truncate(asset.name, :length => 20) %></h2>
 
         <div class="asset_preview_social text-center">
           <% asset.digital_addresses.order("address_type asc").each do |digi| %>

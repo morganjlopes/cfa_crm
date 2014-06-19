@@ -64,6 +64,13 @@ $blue_hover: rgba(82, 186, 213, 0.75);
 	}
 }
 
+.btn {
+	[class^="icon-"],
+	[class*=" icon-"] {
+		font-size: 11px;
+	}
+}
+
 .btn-group-justified {
 	display: block;
 }

@@ -1,32 +1,55 @@
 class MessagesController < ApplicationController
   before_action :load_community_from_subdomain
-  before_action :set_message, only: [:show, :edit, :update, :destroy]
 
   add_breadcrumb "Home", :community_home_path
 
   # GET /messages
   # GET /messages.json
   def index
-    @messages = @community.messages.order("created_at desc").all
+    if params[:person_id].present?
+      @person = Person.friendly.find(params[:person_id])
+      @messages = @person.messages.order("created_at desc").all
+
+      @page_subtitle    = "#{@person.name}"
+
+      add_breadcrumb "People", people_path, :title => "#{@community.name} People"
+      add_breadcrumb "#{@person.name}", person_path(@person), :title => "#{@person.name} within #{@community.name}"
+      add_breadcrumb "Messages", person_messages_path(@person), :title => "#{@community.name} Messages"
+    else
+      @messages = @community.messages.order("created_at desc").all
+
+      @page_subtitle    = "Providing Constant Contact"
+
+      add_breadcrumb "Messages", messages_path, :title => "#{@community.name} Messages"
+    end
     
     @tab_name         = "messages"
     @page_title       = "Messages"
-    @page_subtitle    = "Providing Constant Contact"
     @page_description = ""
-
-    add_breadcrumb "Messages", messages_path, :title => "#{@community.name} Messages"
   end
 
   # GET /messages/1
   # GET /messages/1.json
   def show
+    if params[:person_id].present?
+      @person = Person.friendly.find(params[:person_id])
+      @message = @person.messages.find(params[:id])
+
+      add_breadcrumb "People", people_path, :title => "#{@community.name} People"
+      add_breadcrumb "#{@person.name}", person_path(@person), :title => "#{@person.name} within #{@community.name}"
+      add_breadcrumb "Messages", person_messages_path(@person), :title => "#{@community.name} Messages"
+      add_breadcrumb "'#{@message.subject}'", message_path(@message), :title => "#{@message.subject}"
+    else
+      @message = @community.messages.find(params[:id])
+      
+      add_breadcrumb "Messages", messages_path, :title => "#{@community.name} Messages"
+      add_breadcrumb "'#{@message.subject}'", message_path(@message), :title => "#{@message.subject}"
+    end
+
     @tab_name         = "messages"
     @page_title       = "'#{@message.subject}'"
     @page_subtitle    = "Message from #{@message.user.email}"
     @page_description = ""
-
-    add_breadcrumb "Messages", messages_path, :title => "#{@community.name} Messages"
-    add_breadcrumb "'#{@message.subject}'", message_path(@message), :title => "#{@message.subject}"
   end
 
   # GET /messages/new
