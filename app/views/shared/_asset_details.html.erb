@@ -3,7 +3,7 @@
 <% if asset.photo.present? %>
   <%= image_tag asset.photo_url(:medium), :class => "asset_img" %>
 <% else %>
-  <%= image_tag "default_company.png", :class => "asset_img" %>
+  <%= image_tag "default_#{asset.class.to_s.downcase}.png", :class => "asset_img" %>
 <% end %>
 
 <!-- Contact Info -->
